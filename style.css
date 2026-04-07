@@ -9,7 +9,11 @@
     --accent-dark: #552919;
     --border: #ab7843;
     --shadow: rgba(85, 41, 25, 0.12);
+<<<<<<< HEAD
     --card-bg: #000033;
+=======
+    --card-bg: #552919;
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
     --panel-bg: #f8f2ea;
     --chip-bg: #f5ede3;
     --chip-hover: #efe0cf;
@@ -149,7 +153,11 @@ body.sem-rolagem {
 
 .mega-menu {
     position: absolute;
+<<<<<<< HEAD
     top: calc(100% + 60px);
+=======
+    top: calc(100% + 1px);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
     left: 50%;
     right: auto;
     transform: translateY(-18px);
@@ -378,6 +386,7 @@ body.sem-rolagem {
 }
 
 .acao-topo--tema {
+<<<<<<< HEAD
     border-color: rgba(255, 255, 255, 0.22);
     background: #000033;
     color: #f7fbff;
@@ -387,6 +396,10 @@ body.sem-rolagem {
     background: #0a0a4d;
     border-color: rgba(255, 255, 255, 0.32);
     color: #f7fbff;
+=======
+    border-color: rgba(171, 120, 67, 0.28);
+    background: var(--chip-bg);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
 }
 
 .acao-topo--link {
@@ -805,7 +818,10 @@ main {
     display: block;
     margin-bottom: 10px;
     color: #bc7f39;
+<<<<<<< HEAD
     font-family: "Montserrat", sans-serif;
+=======
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.38em;
@@ -815,19 +831,32 @@ main {
 .colecao-destaque__titulo {
     margin: 0;
     color: #5c2415;
+<<<<<<< HEAD
     font-family: "Montserrat", sans-serif;
     font-size: clamp(1.55rem, 2.8vw, 2.3rem);
     font-weight: 800;
+=======
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(1.24rem, 2.32vw, 1.83rem);
+    font-weight: 600;
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
     line-height: 1.04;
     letter-spacing: 0.11em;
     text-transform: uppercase;
 }
 
 .colecao-destaque__texto {
+<<<<<<< HEAD
     max-width: 540px;
     margin-top: 4px;
     color: #9a603c;
     font-family: "Montserrat", sans-serif;
+=======
+    max-width: 690px;
+    margin-top: 10px;
+    color: #9a603c;
+    font-family: "Cormorant Garamond", serif;
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
     font-size: clamp(0.73rem, 1.08vw, 1.03rem);
     font-weight: 400;
     line-height: 1.25;
@@ -1743,10 +1772,17 @@ body[data-theme="dark"] #lista-carrinho button:hover {
     display: flex;
     align-items: center;
     gap: 12px;
+<<<<<<< HEAD
     background: #000033;
     border-radius: 24px;
     padding: 22px 26px;
     box-shadow: 0 12px 28px rgba(0, 0, 51, 0.2);
+=======
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 22px 26px;
+    box-shadow: 0 8px 20px var(--shadow);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
 }
 
 .pesquisa-icone {
@@ -1775,6 +1811,7 @@ body[data-theme="dark"] #lista-carrinho button:hover {
     padding: 0;
     border: none;
     font-size: 18px;
+<<<<<<< HEAD
     color: #f7fbff;
     background: transparent;
 }
@@ -1783,6 +1820,12 @@ body[data-theme="dark"] #lista-carrinho button:hover {
     color: rgba(247, 251, 255, 0.58);
 }
 
+=======
+    color: var(--text);
+    background: transparent;
+}
+
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
 #barra-pesquisa:focus {
     outline: none;
 }
@@ -1812,9 +1855,15 @@ body[data-theme="dark"] #lista-carrinho button:hover {
     top: auto;
     left: auto;
     width: 100%;
+<<<<<<< HEAD
     background: #000033;
     border-radius: 28px;
     box-shadow: 0 22px 48px rgba(0, 0, 51, 0.24);
+=======
+    background: var(--card-bg);
+    border-radius: 28px;
+    box-shadow: 0 18px 45px rgba(85, 41, 25, 0.18);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
     padding: 32px 30px 24px;
     text-align: left;
     margin-top: 18px;
@@ -1830,7 +1879,11 @@ body[data-theme="dark"] #lista-carrinho button:hover {
 .painel-pesquisa__bloco h3,
 .painel-pesquisa__topo {
     font-size: 18px;
+<<<<<<< HEAD
     color: #f7fbff;
+=======
+    color: var(--accent-dark);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
     margin-bottom: 18px;
 }
 
@@ -1852,7 +1905,11 @@ body[data-theme="dark"] #lista-carrinho button:hover {
 
 .sugestao-item {
     background: transparent;
+<<<<<<< HEAD
     color: #f7fbff;
+=======
+    color: var(--text);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
     border: none;
     padding: 0;
     margin-top: 0;
@@ -1867,12 +1924,20 @@ body[data-theme="dark"] #lista-carrinho button:hover {
 
 .sugestao-item:hover {
     background: transparent;
+<<<<<<< HEAD
     color: #d9b48f;
+=======
+    color: var(--accent);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
 }
 
 .btn-ver-todos {
     background: transparent;
+<<<<<<< HEAD
     color: #d9b48f;
+=======
+    color: var(--accent);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
     border: none;
     padding: 0;
     margin-top: 0;
@@ -1883,7 +1948,11 @@ body[data-theme="dark"] #lista-carrinho button:hover {
 
 .btn-ver-todos:hover {
     background: transparent;
+<<<<<<< HEAD
     color: #f1d1ad;
+=======
+    color: var(--accent-dark);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
 }
 
 .lista-resultados-pesquisa {
@@ -1897,7 +1966,11 @@ body[data-theme="dark"] #lista-carrinho button:hover {
     align-items: center;
     gap: 18px;
     padding: 18px 0;
+<<<<<<< HEAD
     border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+=======
+    border-bottom: 1px solid var(--border);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
 }
 
 .overlay-pesquisa--visivel .pesquisa-campo,
@@ -1976,13 +2049,19 @@ body[data-theme="dark"] #lista-carrinho button:hover {
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 14px;
+<<<<<<< HEAD
     color: #f7fbff;
+=======
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
 }
 
 .resultado-pesquisa__info p {
     font-size: 18px;
     font-weight: 600;
+<<<<<<< HEAD
     color: #d9b48f;
+=======
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
 }
 
 .resultado-pesquisa__botao {
@@ -2507,7 +2586,11 @@ body[data-theme="dark"] .produto-cta:hover {
     }
 
     .colecao-destaque__titulo {
+<<<<<<< HEAD
         font-size: clamp(1.6rem, 6.8vw, 2.2rem);
+=======
+        font-size: clamp(1.3rem, 6vw, 1.9rem);
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
         letter-spacing: 0.08em;
     }
 

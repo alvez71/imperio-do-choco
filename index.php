@@ -28,7 +28,11 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+=======
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -427,3 +431,7 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
 </html>
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f2cedfee0b6c235c4b3af2c04d6952b954af5714
