@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto | Velle Dulcis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topo-site topo-site--produto">
+        <a class="marca-site" href="index.html" aria-label="Voltar para a vitrine" data-home-link>
+            <img class="marca-site__logo" src="logo-velle-dulcis.png" alt="Velle Dulcis">
+        </a>
+
+        <nav class="menu-topo" aria-label="Principal">
+            <div class="menu-topo__item menu-topo__item--mega">
+                <a href="index.html#vitrine" data-home-link class="menu-topo__link menu-topo__link--dropdown">
+                    <span>Chocolate</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 10l5 5 5-5"></path>
+                    </svg>
+                </a>
+
+                <div class="mega-menu" role="group" aria-label="Explorar chocolates">
+                    <div class="mega-menu__colunas">
+                        <section class="mega-menu__coluna">
+                            <p class="mega-menu__titulo">Colecoes</p>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__item">
+                                <strong>Selecao da Casa</strong>
+                                <span>Os sabores que mais chamam atencao na vitrine.</span>
+                            </a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__item">
+                                <strong>Presentes Especiais</strong>
+                                <span>Opcoes pensadas para surpreender com visual e sabor.</span>
+                            </a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__item">
+                                <strong>Importados</strong>
+                                <span>Achados diferentes para quem quer provar algo novo.</span>
+                            </a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__item">
+                                <strong>Edicoes Premium</strong>
+                                <span>Produtos com proposta mais sofisticada e marcante.</span>
+                            </a>
+                        </section>
+
+                        <section class="mega-menu__coluna">
+                            <p class="mega-menu__titulo">Tipos</p>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Chocolate recheado</a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Chocolate artesanal</a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Caixas premium</a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Tabletes</a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Importados</a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Mais Vendidos</a>
+                        </section>
+
+                        <section class="mega-menu__coluna">
+                            <p class="mega-menu__titulo">Momentos</p>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Para presentear</a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Para dividir</a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Para kits</a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Novidades</a>
+                            <a href="index.html#vitrine" data-home-link class="mega-menu__lista-link">Vitrine completa</a>
+                        </section>
+                    </div>
+
+                    <div class="mega-menu__destaques">
+                        <a class="mega-menu__card" href="produto.html?id=jojo-moranguinho">
+                            <img src="https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_alpinellawithstrawberry100gr.jpeg?v=1761647260" alt="Jojo Moranguinho">
+                            <div class="mega-menu__card-conteudo">
+                                <span class="mega-menu__card-tag">Selecao da casa</span>
+                                <strong>Jojo Moranguinho</strong>
+                            </div>
+                        </a>
+
+                        <a class="mega-menu__card" href="produto.html?id=beicinho-de-chocolate">
+                            <img src="https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_560cde9e09eea7d7770f1c1d5db26d91.jpeg?v=1768478586" alt="Beicinho de Chocolate">
+                            <div class="mega-menu__card-conteudo">
+                                <span class="mega-menu__card-tag">Favorito da vitrine</span>
+                                <strong>Beicinho de Chocolate</strong>
+                            </div>
+                        </a>
+
+                        <a class="mega-menu__card mega-menu__card--alto" href="produto.html?id=six-server">
+                            <img src="https://www.rickdoces.com.br/estatico/rickdoces/images/produto/f93490b5f7cab0f200bc76fb4cddde1f.png?v=1774458174" alt="Six Server">
+                            <div class="mega-menu__card-conteudo">
+                                <span class="mega-menu__card-tag">Edicao premium</span>
+                                <strong>Six Server</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a href="index.html" data-home-link>Colecoes</a>
+            <a href="index.html" data-home-link>Aprenda</a>
+        </nav>
+    </header>
+
+    <main class="produto-pagina">
+        <div id="produto-container" class="produto-container"></div>
+    </main>
+
+    <script src="products-data.js"></script>
+    <script src="produto.js"></script>
+</body>
+
+</html>
