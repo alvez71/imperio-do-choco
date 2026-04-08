@@ -28,7 +28,7 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -195,7 +195,7 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
                     </div>
                 </div>
             </div>
-            <a href="#" class="menu-topo__link">Aprenda</a>
+            <a href="historia.html" class="menu-topo__link">Nossa historia</a>
         </nav>
 
         <div class="acoes-topo">
