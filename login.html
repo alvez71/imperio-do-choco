@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | Velle Dulcis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <main class="login-page">
+        <section class="login-hero">
+            <a class="login-hero__brand" href="index.html" aria-label="Voltar para a vitrine">
+                <img src="logo-velle-dulcis.png" alt="Velle Dulcis">
+            </a>
+
+            <p class="login-hero__eyebrow">Area administrativa</p>
+            <h1>Entre para gerenciar produtos, acessos e o painel da loja.</h1>
+            <p class="login-hero__text">
+                Esta primeira versao usa autenticacao local para iniciar o fluxo. Depois podemos conectar com PHP, banco de dados ou API.
+            </p>
+
+            <div class="login-demo">
+                <strong>Acesso de demonstracao</strong>
+                <span>Email: admin@imperiodochocolate.com</span>
+                <span>Senha: admin123</span>
+            </div>
+        </section>
+
+        <section class="login-card">
+            <div class="login-card__header">
+                <p class="login-card__eyebrow">Login</p>
+                <h2>Fazer login</h2>
+                <p>Use o acesso de teste para abrir o painel administrativo.</p>
+            </div>
+
+            <form id="form-login" class="login-form">
+                <label class="login-form__field">
+                    <span>Email</span>
+                    <input id="email" type="email" placeholder="admin@imperiodochocolate.com" required>
+                </label>
+
+                <label class="login-form__field">
+                    <span>Senha</span>
+                    <input id="senha" type="password" placeholder="Digite sua senha" required>
+                </label>
+
+                <button type="submit">Entrar no painel</button>
+                <p id="login-mensagem" class="login-form__message" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

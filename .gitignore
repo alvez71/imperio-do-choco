@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.env
+.env.*
+
+node_modules/
+vendor/
+
+*.log
+
+Imperio do Chocolate.html

@@ -1,0 +1,20 @@
+----------Testar Banco de Dados----------
+
+1. Baixe e instale o XAMPP na sua máquina
+
+2. Pegue a versão do commit do GitHub que está com banco de dados e coloque DENTRO da pasta "htdocs" do XAMPP, geralmente é esse caminho: "C:\xampp\htdocs", cole a pasta do projeto DENTRO dela
+
+3. Após colar a pasta, abra o painel "XAMPP Control Panel" que você acabou de instalar, e clique em "Start" nas opções ->> "MySQL" e "Apache"(As duas opções tem que ficar VERDES)
+
+4. Após as duas opções ficarem VERDES vá no seu navegador(Chrome ou Edge) e aonde você digita os links, coloque os seguintes links(NA ORDEM):
+
+- Abra o link "http://localhost/imperio-do-choco/login.php"(Copie somente dentro das ASPAS)
+- faça o login com os seguintes dados: Email: admin@imperiodochocolate.com
+                                       Senha: admin123
+- Após o login, o vai abrir um novo site (admin.php) que no caso é o painel admin, aqui é onde os administradores(Vendedores) irão cadastrar os próprios chocolates, cadastre um só para testes
+- Após cadastrar o chocolate teste, abra uma nova aba e abra o seguinte link: "http://localhost/imperio-do-choco/index.php"(Copie somente dentro das ASPAS) e pronto, caso queira testar novamente, só ir adicionando mais
+chocolates.
+- Caso queira testar SOMENTE o banco de dados, sem muita burocracia, você pode testar o seguinte link: "http://localhost/imperio-do-choco/teste_banco.php"(Copie somente dentro das ASPAS)
+
+
+Por enquanto é isso, até.(CASO QUEIRA FAZER ALTERAÇÕES NO BANCO, ALTERAÇÕES BOAS, COLOQUE AS ALTERAÇÕES AQUI EM BAIXO!!!!!!!!!!!!!!!
