@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 -- Execute este arquivo depois de rodar database/migrate.php
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 USE imperio_do_choco;
 
 CREATE TABLE IF NOT EXISTS usuarios (

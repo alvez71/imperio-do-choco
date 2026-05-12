@@ -26,7 +26,10 @@ $nomeUsuario = (string) ($_SESSION["usuario_nome"] ?? "Administrador");
     <title>Admin | Velle Dulcis</title>
 </head>
 <body>
+<<<<<<< HEAD
     <script src="theme-init.js"></script>
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
     <main class="admin-shell">
         <header class="admin-topbar">
             <a class="admin-topbar__voltar" href="index.php">Voltar para a vitrine</a>

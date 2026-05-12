@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Aba | Velle Dulcis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260417-5">
+</head>
+
+<body class="pagina-historia">
+    <header class="topo-site topo-site--historia">
+        <a class="marca-site" href="index.html" aria-label="Voltar para a vitrine">
+            <img class="marca-site__logo" src="logo-velle-dulcis.png" alt="Velle Dulcis">
+        </a>
+
+        <nav class="menu-topo" aria-label="Principal">
+            <a href="index.html#vitrine" class="menu-topo__link">Chocolate</a>
+            <a href="index.html#vitrine" class="menu-topo__link">Colecoes</a>
+            <a href="historia.html" class="menu-topo__link">Nossa historia</a>
+        </nav>
+
+        <a id="nova-aba-voltar" class="historia-voltar" href="index.html">Voltar ao inicio</a>
+    </header>
+
+    <main class="historia-pagina">
+        <section class="historia-hero historia-hero--vazio"></section>
+    </main>
+
+    <script>
+        (function () {
+            const HOME_ROUTE_STORAGE_KEY = "imperio_home_route";
+            const fallbackRoute = "index.html";
+            const routeFromSession = window.sessionStorage
+                ? sessionStorage.getItem(HOME_ROUTE_STORAGE_KEY)
+                : "";
+            const routeFromReferrer = /index\.php($|\?)/i.test(document.referrer) ? "index.php" : "";
+            const homeRoute = routeFromSession || routeFromReferrer || fallbackRoute;
+
+            const voltarLink = document.getElementById("nova-aba-voltar");
+            const logoLink = document.querySelector(".topo-site--historia .marca-site");
+
+            if (voltarLink) {
+                voltarLink.setAttribute("href", homeRoute);
+            }
+
+            if (logoLink) {
+                logoLink.setAttribute("href", homeRoute);
+            }
+        })();
+    </script>
+</body>
+
+</html>

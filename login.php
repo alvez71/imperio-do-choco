@@ -26,7 +26,11 @@ if (isset($_SESSION["usuario_id"])) {
 
 $erro = "";
 $emailPreenchido = "";
+<<<<<<< HEAD
 $bancoDisponivel = bancoDeDadosDisponivel($pdo) && ($pdo instanceof PDO ? schemaUsuariosDisponivel($pdo) : false);
+=======
+$bancoDisponivel = bancoDeDadosDisponivel($pdo);
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 $mensagemBancoIndisponivel = "O banco de dados esta indisponivel no momento. Tente novamente mais tarde.";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -71,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login.css">
 </head>
+<<<<<<< HEAD
 <body class="login-body login-body--customer">
     <script src="theme-init.js"></script>
     <main class="login-modal-shell">
@@ -97,11 +102,46 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         name="email"
                         autocomplete="email"
                         placeholder="Email"
+=======
+<body>
+    <main class="login-page">
+        <section class="login-hero">
+            <a class="login-hero__brand" href="index.php" aria-label="Voltar para a vitrine">
+                <img src="logo-velle-dulcis.png" alt="Velle Dulcis">
+            </a>
+
+            <p class="login-hero__eyebrow">Minha conta</p>
+            <h1>Entre na sua conta para acompanhar seus pedidos e acessar sua area.</h1>
+            <p class="login-hero__text">
+                Clientes entram normalmente por aqui e, se ainda nao tiverem acesso, podem criar uma conta em segundos. Contas administrativas continuam protegidas e so acessam o painel quando tiverem permissao.
+            </p>
+
+            <div class="login-hero__actions">
+                <a class="login-hero__cta" href="cadastro.php">Criar conta de cliente</a>
+            </div>
+        </section>
+
+        <section class="login-card">
+            <div class="login-card__header">
+                <p class="login-card__eyebrow">Login</p>
+                <h2>Fazer login</h2>
+                <p>Entre com sua conta para acessar o painel administrativo ou a sua area de cliente.</p>
+            </div>
+
+            <form method="post" class="login-form" novalidate>
+                <label class="login-form__field">
+                    <span>Email</span>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="admin@imperiodochocolate.com"
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
                         value="<?php echo htmlspecialchars($emailPreenchido, ENT_QUOTES, "UTF-8"); ?>"
                         required
                     >
                 </label>
 
+<<<<<<< HEAD
                 <label class="login-form__field login-form__field--customer">
                     <span>Senha*</span>
                     <input
@@ -118,6 +158,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
 
                 <button type="submit">Entrar</button>
+=======
+                <label class="login-form__field">
+                    <span>Senha</span>
+                    <input type="password" name="senha" placeholder="Digite sua senha" required>
+                </label>
+
+                <button type="submit">Entrar na conta</button>
+
+                <a class="login-form__secondary" href="cadastro.php">Nao tenho conta ainda</a>
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 
                 <?php if ($erro !== "" || !$bancoDisponivel): ?>
                     <p id="login-mensagem" class="login-form__message" aria-live="polite">
@@ -125,6 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </p>
                 <?php endif; ?>
 
+<<<<<<< HEAD
                 <a class="login-form__create" href="cadastro.php">
                     Criar conta
                     <span aria-hidden="true">&rarr;</span>
@@ -134,6 +185,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <p class="login-modal__note">
                 Clientes seguem para a propria area e administradores entram no painel ao usar as credenciais corretas.
             </p>
+=======
+                <p class="login-form__hint">
+                    Ainda nao tem conta?
+                    <a href="cadastro.php">Criar cadastro</a>
+                </p>
+            </form>
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
         </section>
     </main>
 </body>

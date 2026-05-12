@@ -46,6 +46,7 @@ function normalizarChocolate(chocolate, index = 0) {
         imagens: imagens.length > 0 ? imagens : [imagemPrincipal].filter(Boolean),
         descricao: chocolate.descricao || "Um chocolate especial preparado para transformar qualquer momento em algo memoravel.",
         categoria: chocolate.categoria || "Chocolate",
+<<<<<<< HEAD
         tipo: chocolate.tipo || chocolate.categoria || "Chocolate",
         peso: chocolate.peso || "",
         peso_gramas: chocolate.peso_gramas !== null
@@ -57,6 +58,10 @@ function normalizarChocolate(chocolate, index = 0) {
         estoque_quantidade: Number.isFinite(Number(chocolate.estoque_quantidade))
             ? Math.max(0, Number(chocolate.estoque_quantidade))
             : 0,
+=======
+        peso: chocolate.peso || "",
+        destaque: chocolate.destaque || "Selecao da casa",
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
     };
 }
 

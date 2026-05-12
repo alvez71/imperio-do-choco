@@ -47,6 +47,7 @@ body {
         linear-gradient(180deg, var(--page-bg-soft) 0%, var(--page-bg) 100%);
 }
 
+<<<<<<< HEAD
 body.account-page {
     background:
         linear-gradient(180deg, #f7f1e3 0%, #fbf8f0 100%);
@@ -131,6 +132,8 @@ body[data-theme="dark"] .admin-product-item__price {
     color: var(--accent-strong);
 }
 
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 a,
 button,
 input,
@@ -473,6 +476,7 @@ select:focus-visible {
     resize: vertical;
 }
 
+<<<<<<< HEAD
 .admin-card--account {
     margin-bottom: 20px;
 }
@@ -598,6 +602,8 @@ select:focus-visible {
     margin-top: 4px;
 }
 
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 .admin-toolbar,
 .admin-list-toolbar,
 .admin-product-item__actions {
@@ -974,6 +980,7 @@ select:focus-visible {
     .admin-product-item__actions .admin-action {
         flex: 1 1 180px;
     }
+<<<<<<< HEAD
 
     .account-section {
         padding: 20px 16px;
@@ -985,6 +992,8 @@ select:focus-visible {
         flex-direction: row;
         align-items: center;
     }
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 }
 
 @media (max-width: 520px) {
@@ -1011,6 +1020,7 @@ select:focus-visible {
     .admin-topbar__voltar {
         width: 100%;
     }
+<<<<<<< HEAD
 
     .admin-card__header--account-inline,
     .account-list-card__top {
@@ -1021,6 +1031,8 @@ select:focus-visible {
     .account-add-button {
         padding: 0;
     }
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 }
 
 @media (prefers-reduced-motion: reduce) {

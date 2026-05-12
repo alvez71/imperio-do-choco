@@ -9,7 +9,10 @@
 </head>
 
 <body>
+<<<<<<< HEAD
     <script src="theme-init.js"></script>
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
     <main class="admin-shell">
         <header class="admin-topbar">
             <a class="admin-topbar__voltar" href="index.html">Voltar para a vitrine</a>
@@ -247,11 +250,14 @@
 
         const sessaoAtual = obterSessaoAutenticada();
 
+<<<<<<< HEAD
         if (!usuarioAutenticadoEhAdmin()) {
             window.location.href = obterDestinoPosLogin(sessaoAtual ? sessaoAtual.papel : "");
             throw new Error("Usuario sem permissao administrativa.");
         }
 
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
         window.ADMIN_PANEL_OPTIONS = {
             loginUrl: "login.html",
             logoutMode: "local",

@@ -15,10 +15,13 @@ const barraPesquisa = document.getElementById("barra-pesquisa");
 const btnLimparPesquisa = document.getElementById("btn-limpar-pesquisa");
 const btnVerTodos = document.getElementById("btn-ver-todos");
 const container = document.getElementById("container-cards");
+<<<<<<< HEAD
 const vitrineCount = document.getElementById("vitrine-count");
 const vitrineSortButtons = document.querySelectorAll("[data-vitrine-sort]");
 const vitrineScrollButtons = document.querySelectorAll("[data-vitrine-scroll]");
 const instagramLinks = document.querySelectorAll('a[aria-label="Instagram"]');
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 const painelPesquisa = document.getElementById("painel-pesquisa");
 const listaSugestoes = document.getElementById("lista-sugestoes");
 const listaResultadosPesquisa = document.getElementById("lista-resultados-pesquisa");
@@ -32,7 +35,10 @@ const fecharPopupRemocao = document.getElementById("fechar-popup-remocao");
 const popupBoasVindas = document.getElementById("popup-boas-vindas");
 const fecharPopupBoasVindas = document.getElementById("fechar-popup-boas-vindas");
 const btnTema = document.getElementById("btn-tema");
+<<<<<<< HEAD
 const btnFinalizarPedido = document.getElementById("finalizar");
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 const headerSite = document.querySelector(".topo-site");
 const menuMobileToggle = document.getElementById("menu-mobile-toggle");
 const menuMobile = document.getElementById("menu-mobile");
@@ -41,10 +47,14 @@ const menuMobileActionButtons = document.querySelectorAll("[data-mobile-action]"
 const menuMobileLinks = document.querySelectorAll(".menu-mobile__link, .menu-mobile__acao-link");
 const HOME_ROUTE_STORAGE_KEY = "imperio_home_route";
 const THEME_STORAGE_KEY = "imperio_theme";
+<<<<<<< HEAD
 const VITRINE_SORT_STORAGE_KEY = "imperio_vitrine_sort";
 const VITRINE_SORT_OPTIONS = new Set(["recommended", "price-asc"]);
 const CART_SYNC_URL = "carrinho.php";
 const CHECKOUT_URL = "finalizar_pedido.php";
+=======
+const CART_SYNC_URL = "carrinho.php";
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 const rotaHomeAtual = /\.php($|\?)/i.test(window.location.pathname) ? "index.php" : "index.html";
 const HEADER_COMPACT_ENTER_SCROLL = 80;
 const HEADER_COMPACT_EXIT_SCROLL = 28;
@@ -241,16 +251,23 @@ menuMobileActionButtons.forEach((button) => {
     });
 });
 
+<<<<<<< HEAD
 window.addEventListener("scroll", () => {
     atualizarEstadoHeader();
     reposicionarPopupCarrinhoAtivo();
 }, { passive: true });
+=======
+window.addEventListener("scroll", atualizarEstadoHeader, { passive: true });
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 window.addEventListener("resize", () => {
     if (window.innerWidth > 768 && menuMobileAberto()) {
         fecharMenuMobile();
     }
+<<<<<<< HEAD
 
     reposicionarPopupCarrinhoAtivo();
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 });
 window.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && menuMobileAberto()) {
@@ -262,15 +279,23 @@ let carrinho = [];
 let listaChocolates = [];
 let popupCarrinhoTimeout;
 let popupCarrinhoInicio = 0;
+<<<<<<< HEAD
+=======
+let popupCarrinhoTempoRestante = 0;
+let popupCarrinhoUltimoProduto = "";
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 let popupRemocaoTimeout;
 let popupBoasVindasTimeout;
 let sincronizandoCarrinho = false;
 let timeoutFechamentoPesquisa;
 let carregamentoCarrinhoPromise = Promise.resolve();
+<<<<<<< HEAD
 let ordenacaoVitrine = obterOrdenacaoInicial();
 let vitrineArrastando = false;
 let vitrineArrasteInicioX = 0;
 let vitrineScrollInicio = 0;
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 
 const DURACAO_POPUP_CARRINHO = 4000;
 
@@ -282,6 +307,10 @@ function esconderPopupCarrinho() {
 function encerrarPopupCarrinho() {
     clearTimeout(popupCarrinhoTimeout);
     popupCarrinhoInicio = 0;
+<<<<<<< HEAD
+=======
+    popupCarrinhoTempoRestante = 0;
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
     esconderPopupCarrinho();
 }
 
@@ -293,6 +322,7 @@ function animarBarraPopup(duracao, proporcaoInicial = 1) {
     popupCarrinhoBarra.style.transform = "scaleX(0)";
 }
 
+<<<<<<< HEAD
 function posicionarPopupCarrinho() {
     if (!popupCarrinho || !btnCarrinho) {
         return;
@@ -334,6 +364,25 @@ function mostrarPopupCarrinho(nomeProduto, duracao = DURACAO_POPUP_CARRINHO, pro
 
     popupCarrinhoProduto.textContent = nomeProduto;
     posicionarPopupCarrinho();
+=======
+function mostrarPopupCarrinho(nomeProduto, duracao = DURACAO_POPUP_CARRINHO, proporcaoInicial = 1) {
+    clearTimeout(popupCarrinhoTimeout);
+
+    popupCarrinhoUltimoProduto = nomeProduto;
+    popupCarrinhoTempoRestante = duracao;
+
+    if (carrinhoLateral.classList.contains("ativo")) {
+        popupCarrinhoInicio = 0;
+        popupCarrinhoBarra.style.transition = "none";
+        popupCarrinhoBarra.style.transform = `scaleX(${proporcaoInicial})`;
+        esconderPopupCarrinho();
+        return;
+    }
+
+    popupCarrinhoInicio = Date.now();
+
+    popupCarrinhoProduto.textContent = nomeProduto;
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
     popupCarrinho.classList.add("ativo");
     popupCarrinho.setAttribute("aria-hidden", "false");
     animarBarraPopup(duracao, proporcaoInicial);
@@ -346,7 +395,37 @@ function pausarPopupCarrinho() {
         return;
     }
 
+<<<<<<< HEAD
     encerrarPopupCarrinho();
+=======
+    const tempoDecorrido = Date.now() - popupCarrinhoInicio;
+    popupCarrinhoTempoRestante = Math.max(0, popupCarrinhoTempoRestante - tempoDecorrido);
+
+    clearTimeout(popupCarrinhoTimeout);
+
+    if (popupCarrinhoTempoRestante <= 0) {
+        encerrarPopupCarrinho();
+        return;
+    }
+
+    const proporcaoRestante = popupCarrinhoTempoRestante / DURACAO_POPUP_CARRINHO;
+    popupCarrinhoBarra.style.transition = "none";
+    popupCarrinhoBarra.style.transform = `scaleX(${proporcaoRestante})`;
+    popupCarrinhoInicio = 0;
+    esconderPopupCarrinho();
+}
+
+function retomarPopupCarrinho() {
+    if (!popupCarrinhoUltimoProduto || popupCarrinhoTempoRestante <= 0 || carrinhoLateral.classList.contains("ativo")) {
+        return;
+    }
+
+    mostrarPopupCarrinho(
+        popupCarrinhoUltimoProduto,
+        popupCarrinhoTempoRestante,
+        popupCarrinhoTempoRestante / DURACAO_POPUP_CARRINHO
+    );
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 }
 
 function mostrarPopupRemocao(nomeProduto) {
@@ -404,15 +483,21 @@ function normalizarItemCarrinho(item) {
     const nome = String(item?.nome || "").trim();
     const imagem = String(item?.imagem || "").trim();
     const produtoRelacionado = obterDadosProduto(nome, imagem);
+<<<<<<< HEAD
     const produtoIdBruto = item?.produto_id ?? item?.produtoId ?? produtoRelacionado?.id ?? null;
     const produtoId = Number.parseInt(String(produtoIdBruto ?? ""), 10);
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
     const slug = String(item?.slug || produtoRelacionado?.slug || "").trim();
     const chave = String(
         item?.chave || slug || (typeof slugifyProductName === "function" ? slugifyProductName(nome) : nome)
     ).trim();
 
     return {
+<<<<<<< HEAD
         produto_id: Number.isInteger(produtoId) && produtoId > 0 ? produtoId : null,
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
         chave,
         slug,
         nome,
@@ -454,6 +539,7 @@ async function persistirCarrinhoNoServidor() {
     }
 }
 
+<<<<<<< HEAD
 async function finalizarPedido() {
     if (!usuarioTemCarrinhoPersistente()) {
         window.location.href = obterRotasApp().login;
@@ -510,6 +596,8 @@ async function finalizarPedido() {
     }
 }
 
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 function persistirCarrinhoDeSaida() {
     if (!usuarioTemCarrinhoPersistente() || sincronizandoCarrinho || !navigator.sendBeacon) {
         return;
@@ -553,6 +641,7 @@ async function carregarCarrinhoDaConta() {
     }
 }
 
+<<<<<<< HEAD
 function obterOrdenacaoInicial() {
     try {
         const ordenacaoSalva = localStorage.getItem(VITRINE_SORT_STORAGE_KEY);
@@ -721,6 +810,8 @@ function posicionarSetasVitrine() {
     vitrine.style.setProperty("--vitrine-setas-top", `${centroImagem}px`);
 }
 
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 function normalizarTextoBusca(valor) {
     return String(valor || "")
         .normalize("NFD")
@@ -745,6 +836,7 @@ function aplicarPesquisa() {
     btnLimparPesquisa.classList.toggle("oculto", !texto);
 }
 
+<<<<<<< HEAD
 function obterChocolatesVisiveisPelaBusca() {
     const texto = normalizarTextoBusca(barraPesquisa.value);
 
@@ -753,6 +845,8 @@ function obterChocolatesVisiveisPelaBusca() {
         : [...listaChocolates];
 }
 
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 function criarSugestoes(texto) {
     const nomes = listaChocolates.map((choc) => choc.nome);
 
@@ -890,6 +984,7 @@ function limparPesquisa() {
 
 function renderizarChocolates(chocolates) {
     container.innerHTML = "";
+<<<<<<< HEAD
     container.scrollLeft = 0;
     const chocolatesOrdenados = ordenarChocolates(chocolates);
     atualizarContadorVitrine(chocolatesOrdenados.length);
@@ -947,6 +1042,43 @@ function renderizarChocolates(chocolates) {
         posicionarSetasVitrine();
         atualizarSetasVitrine();
     });
+=======
+
+    if (chocolates.length === 0) {
+        container.innerHTML = "<p>Nenhum chocolate encontrado.</p>";
+        return;
+    }
+
+    chocolates.forEach((choc, index) => {
+        const nomeSerializado = JSON.stringify(choc.nome);
+        const imagemSerializada = JSON.stringify(choc.imagem);
+        const quantidade = obterQuantidadeNoCarrinho(choc.nome);
+        const card = document.createElement("div");
+        card.className = "card";
+        card.style.setProperty("--card-stagger-index", String(index % 12));
+        card.innerHTML = `
+            <a class="card__link" href="produto.html?id=${encodeURIComponent(choc.slug)}">
+                <div class="card__imagem-box">
+                    <img src="${choc.imagem}" alt="${choc.nome}">
+                </div>
+                <span class="card__selo">${choc.destaque}</span>
+                <div class="card__conteudo">
+                    <h3>${choc.nome}</h3>
+                    <div class="card__rodape">
+                        <div class="card__preco-bloco">
+                            <p>R$ ${choc.preco.toFixed(2).replace(".", ",")}</p>
+                            <span class="card__quantidade-info">${quantidade > 0 ? `${quantidade} na sacola` : "Disponivel agora"}</span>
+                        </div>
+                        <button type="button" class="card__cta" onclick='event.preventDefault(); event.stopPropagation(); adicionarAoCarrinho(${nomeSerializado}, ${choc.preco}, ${imagemSerializada})' aria-label="Adicionar ${choc.nome} ao carrinho">
+                            Adicionar a sacola
+                        </button>
+                    </div>
+                </div>
+            </a>
+        `;
+        container.appendChild(card);
+    });
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 }
 
 function formatarPreco(valor) {
@@ -1029,7 +1161,11 @@ async function carregarChocolates() {
 
 window.adicionarAoCarrinho = function (nome, preco, imagem) {
     const itemExistente = carrinho.find((item) => item.nome === nome);
+<<<<<<< HEAD
     const produtoEntrouNaSacola = !itemExistente;
+=======
+    const deveExibirPopup = !itemExistente;
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 
     if (itemExistente) {
         itemExistente.qtd++;
@@ -1046,7 +1182,11 @@ window.adicionarAoCarrinho = function (nome, preco, imagem) {
 
     atualizarCarrinho();
 
+<<<<<<< HEAD
     if (produtoEntrouNaSacola) {
+=======
+    if (deveExibirPopup) {
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
         mostrarPopupCarrinho(nome);
     } else {
         mostrarPopupAcao("Produto foi adicionado ao carrinho !!!");
@@ -1279,12 +1419,18 @@ async function abrirCarrinho() {
 }
 
 function fecharPainelCarrinho() {
+<<<<<<< HEAD
     if (!carrinhoLateral.classList.contains("ativo")) {
         return;
     }
 
     carrinhoLateral.classList.remove("ativo");
     overlayCarrinho.classList.remove("ativo");
+=======
+    carrinhoLateral.classList.remove("ativo");
+    overlayCarrinho.classList.remove("ativo");
+    retomarPopupCarrinho();
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 
     if (overlayPesquisa.classList.contains("oculto") && !menuMobileAberto()) {
         document.body.classList.remove("sem-rolagem");
@@ -1305,7 +1451,11 @@ fecharCarrinho.addEventListener("click", fecharPainelCarrinho);
 overlayCarrinho.addEventListener("click", fecharPainelCarrinho);
 
 document.addEventListener("click", (e) => {
+<<<<<<< HEAD
     if (carrinhoLateral.classList.contains("ativo") && !carrinhoLateral.contains(e.target) && !btnCarrinho.contains(e.target)) {
+=======
+    if (!carrinhoLateral.contains(e.target) && !btnCarrinho.contains(e.target)) {
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
         fecharPainelCarrinho();
     }
 
@@ -1314,6 +1464,7 @@ document.addEventListener("click", (e) => {
     }
 });
 
+<<<<<<< HEAD
 atualizarBotoesOrdenacao();
 configurarArrasteVitrine();
 posicionarSetasVitrine();
@@ -1362,6 +1513,8 @@ instagramLinks.forEach((link) => {
     });
 });
 
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 barraPesquisa.addEventListener("input", aplicarPesquisa);
 barraPesquisa.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
@@ -1393,12 +1546,15 @@ if (fecharPopupBoasVindas) {
     fecharPopupBoasVindas.addEventListener("click", fecharPopupBoasVindasComEstado);
 }
 
+<<<<<<< HEAD
 if (btnFinalizarPedido) {
     btnFinalizarPedido.addEventListener("click", () => {
         void finalizarPedido();
     });
 }
 
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 window.addEventListener("storage", carregarChocolates);
 window.addEventListener("pagehide", persistirCarrinhoDeSaida);
 window.addEventListener("beforeunload", persistirCarrinhoDeSaida);

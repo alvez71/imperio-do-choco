@@ -33,7 +33,10 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
 </head>
 
 <body class="pagina-carregando">
+<<<<<<< HEAD
     <script src="theme-init.js"></script>
+=======
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 
     <header class="topo-site">
         <div class="marca-site">
@@ -119,6 +122,87 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
                 </div>
             </div>
 
+<<<<<<< HEAD
+=======
+            <div class="menu-topo__item menu-topo__item--mega">
+                <a href="#vitrine" class="menu-topo__link menu-topo__link--dropdown">
+                    <span>Colecoes</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 10l5 5 5-5"></path>
+                    </svg>
+                </a>
+
+                <div class="mega-menu" role="group" aria-label="Explorar colecoes">
+                    <div class="mega-menu__colunas">
+                        <section class="mega-menu__coluna">
+                            <p class="mega-menu__titulo">Curadoria</p>
+                            <a href="#vitrine" class="mega-menu__item">
+                                <strong>Selecao da Casa</strong>
+                                <span>Os produtos que melhor representam a identidade da vitrine.</span>
+                            </a>
+                            <a href="#vitrine" class="mega-menu__item">
+                                <strong>Favoritos da Vitrine</strong>
+                                <span>Destaques que chamam atencao pelo visual e pelo sabor.</span>
+                            </a>
+                            <a href="#vitrine" class="mega-menu__item">
+                                <strong>Pequenos Luxos</strong>
+                                <span>Escolhas para presentear ou transformar um momento simples.</span>
+                            </a>
+                            <a href="#vitrine" class="mega-menu__item">
+                                <strong>Importados em Destaque</strong>
+                                <span>Sabores diferentes para quem quer sair do comum.</span>
+                            </a>
+                        </section>
+
+                        <section class="mega-menu__coluna">
+                            <p class="mega-menu__titulo">Colecoes</p>
+                            <a href="#vitrine" class="mega-menu__lista-link">Mais Vendidos</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Presentes especiais</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Importados</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Classicos cremosos</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Premium</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Novidades</a>
+                            <a href="nova-colecao.html" class="mega-menu__lista-link">Colecoes</a>
+                        </section>
+
+                        <section class="mega-menu__coluna">
+                            <p class="mega-menu__titulo">Compre por Estilo</p>
+                            <a href="#vitrine" class="mega-menu__lista-link">Para presentear</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Para compartilhar</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Para kits</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Para impressionar</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Lancamentos</a>
+                        </section>
+                    </div>
+
+                    <div class="mega-menu__destaques">
+                        <a class="mega-menu__card" href="produto.html?id=paizao">
+                            <img src="https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_arnottstimtamoriginal163gr.jpeg?v=1761131171" alt="Paizao">
+                            <div class="mega-menu__card-conteudo">
+                                <span class="mega-menu__card-tag">Presente especial</span>
+                                <strong>Paizao</strong>
+                            </div>
+                        </a>
+
+                        <a class="mega-menu__card" href="produto.html?id=jelly-belly-boba-milk-tea-28gr">
+                            <img src="https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_jellybellybobamilktea28gr.jpeg?v=1772802157" alt="Jelly Belly Boba Milk Tea 28gr">
+                            <div class="mega-menu__card-conteudo">
+                                <span class="mega-menu__card-tag">Importado</span>
+                                <strong>Jelly Belly Boba Milk Tea</strong>
+                            </div>
+                        </a>
+
+                        <a class="mega-menu__card mega-menu__card--alto" href="produto.html?id=milka-caramel-creme-100gr">
+                            <img src="https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_milkacaramelcreme100gr.jpeg?v=1666638362" alt="Milka Caramel-Creme 100gr">
+                            <div class="mega-menu__card-conteudo">
+                                <span class="mega-menu__card-tag">Classico cremoso</span>
+                                <strong>Milka Caramel-Creme 100gr</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
             <a href="#" class="menu-topo__link">Aprenda</a>
         </nav>
 
@@ -145,7 +229,11 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
                     <circle cx="12" cy="8" r="4"></circle>
                     <path d="M5 20c1.8-3.3 4.2-5 7-5s5.2 1.7 7 5"></path>
                 </svg>
+<<<<<<< HEAD
                 <span id="link-conta-texto" data-hide-when-authenticated="true" <?php echo $usuarioAutenticado ? 'hidden' : ''; ?>>
+=======
+                <span id="link-conta-texto" <?php echo $usuarioAutenticado ? 'hidden' : ''; ?>>
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
                     <?php echo htmlspecialchars($rotuloConta, ENT_QUOTES, "UTF-8"); ?>
                 </span>
             </a>
@@ -212,17 +300,25 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
                         </svg>
                         <span>Buscar</span>
                     </button>
+<<<<<<< HEAD
                     <a
                         id="link-conta-mobile"
                         class="menu-mobile__acao-link"
                         href="<?php echo htmlspecialchars($destinoConta, ENT_QUOTES, "UTF-8"); ?>"
                         aria-label="Entrar ou acessar conta"
                     >
+=======
+                    <a class="menu-mobile__acao-link" href="<?php echo htmlspecialchars($destinoConta, ENT_QUOTES, "UTF-8"); ?>">
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <circle cx="12" cy="8" r="4"></circle>
                             <path d="M5 20c1.8-3.3 4.2-5 7-5s5.2 1.7 7 5"></path>
                         </svg>
+<<<<<<< HEAD
                         <span id="link-conta-mobile-texto"><?php echo $usuarioAutenticado ? "Minha conta" : "Entrar"; ?></span>
+=======
+                        <span><?php echo $usuarioAutenticado ? "Minha conta" : "Entrar"; ?></span>
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
                     </a>
                     <button class="menu-mobile__acao" type="button" data-mobile-action="cart">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -241,6 +337,16 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
                             <path d="M13 6l6 6-6 6"></path>
                         </svg>
                     </a>
+<<<<<<< HEAD
+=======
+                    <a class="menu-mobile__link" href="nova-colecao.html">
+                        <span>Colecoes</span>
+                        <svg class="menu-mobile__link-seta" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M5 12h14"></path>
+                            <path d="M13 6l6 6-6 6"></path>
+                        </svg>
+                    </a>
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
                     <a class="menu-mobile__link" href="historia.html">
                         <span>Nossa historia</span>
                         <svg class="menu-mobile__link-seta" viewBox="0 0 24 24" aria-hidden="true">
@@ -302,6 +408,7 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
     </div>
 
     <main>
+<<<<<<< HEAD
         <section id="vitrine" class="grid-chocolates">
             <div class="vitrine-toolbar" aria-label="Controles da vitrine">
                 <div class="vitrine-toolbar__sort" aria-label="Ordenar produtos">
@@ -324,6 +431,11 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
                     </div>
                 </div>
             </div>
+=======
+        <h2>Nossos Chocolates</h2>
+
+        <section id="vitrine" class="grid-chocolates">
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
             <div id="container-cards" class="container"></div>
         </section>
     </main>
@@ -333,6 +445,10 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
             <div class="rodape-site__grid">
                 <section class="rodape-site__coluna">
                     <h3>Shop</h3>
+<<<<<<< HEAD
+=======
+                    <a href="#vitrine">Colecoes</a>
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
                     <a href="#vitrine">Presentes &amp; Kits</a>
                     <a href="#vitrine">Mais Vendidos</a>
                     <a href="#vitrine">Importados</a>
@@ -364,7 +480,11 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
                     <p>Sao Paulo, Brasil</p>
 
                     <div class="rodape-site__social">
+<<<<<<< HEAD
                         <a href="https://www.instagram.com/velledulcis/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram Velle Dulcis">
+=======
+                        <a href="#" aria-label="Instagram">
+>>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
                                 <circle cx="12" cy="12" r="4"></circle>
