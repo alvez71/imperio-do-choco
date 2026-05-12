@@ -1,0 +1,92 @@
+[
+  {
+    "id": "catalogo-jojo-moranguinho",
+    "slug": "jojo-moranguinho",
+    "img": "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_alpinellawithstrawberry100gr.jpeg?v=1761647260",
+    "nome": "Jojo Moranguinho",
+    "preco": 25.99,
+    "categoria": "Chocolate recheado",
+    "peso": "100g",
+    "ref": "VD-1001",
+    "destaque": "Selecao da casa",
+    "descricao": "Chocolate com recheio cremoso e toque de morango para uma experiencia doce e marcante.",
+    "imagens": [
+      "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_alpinellawithstrawberry100gr.jpeg?v=1761647260"
+    ]
+  },
+  {
+    "id": "catalogo-beicinho-de-chocolate",
+    "slug": "beicinho-de-chocolate",
+    "img": "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_560cde9e09eea7d7770f1c1d5db26d91.jpeg?v=1768478586",
+    "nome": "Beicinho de Chocolate",
+    "preco": 25.99,
+    "categoria": "Chocolate artesanal",
+    "peso": "100g",
+    "ref": "VD-1002",
+    "destaque": "Favorito da vitrine",
+    "descricao": "Uma opcao delicada e cremosa, ideal para presentear ou montar combinacoes especiais.",
+    "imagens": [
+      "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_560cde9e09eea7d7770f1c1d5db26d91.jpeg?v=1768478586"
+    ]
+  },
+  {
+    "id": "catalogo-six-server",
+    "slug": "six-server",
+    "img": "https://www.rickdoces.com.br/estatico/rickdoces/images/produto/f93490b5f7cab0f200bc76fb4cddde1f.png?v=1774458174",
+    "nome": "Six Server",
+    "preco": 67,
+    "categoria": "Caixa premium",
+    "peso": "Edicao especial",
+    "ref": "VD-1003",
+    "destaque": "Edicao premium",
+    "descricao": "Selecao especial com visual marcante e proposta premium para momentos de destaque.",
+    "imagens": [
+      "https://www.rickdoces.com.br/estatico/rickdoces/images/produto/f93490b5f7cab0f200bc76fb4cddde1f.png?v=1774458174"
+    ]
+  },
+  {
+    "id": "catalogo-paizao",
+    "slug": "paizao",
+    "img": "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_arnottstimtamoriginal163gr.jpeg?v=1761131171",
+    "nome": "Paizao",
+    "preco": 43.99,
+    "categoria": "Presente especial",
+    "peso": "163g",
+    "ref": "VD-1004",
+    "destaque": "Presente perfeito",
+    "descricao": "Produto pensado para presentear, com sabor intenso e excelente presenca na vitrine.",
+    "imagens": [
+      "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_arnottstimtamoriginal163gr.jpeg?v=1761131171"
+    ]
+  },
+  {
+    "id": "catalogo-jelly-belly-boba-milk-tea-28gr",
+    "slug": "jelly-belly-boba-milk-tea-28gr",
+    "img": "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_jellybellybobamilktea28gr.jpeg?v=1772802157",
+    "nome": "Jelly Belly Boba Milk Tea 28gr",
+    "preco": 12.99,
+    "categoria": "Importados",
+    "peso": "28g",
+    "ref": "VD-1005",
+    "destaque": "Importado",
+    "descricao": "Doce importado com proposta divertida, textura leve e perfil ideal para kits variados.",
+    "imagens": [
+      "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_jellybellybobamilktea28gr.jpeg?v=1772802157"
+    ]
+  },
+  {
+    "id": "catalogo-milka-caramel-creme-100gr",
+    "slug": "milka-caramel-creme-100gr",
+    "img": "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_milkacaramelcreme100gr.jpeg?v=1666638362",
+    "nome": "Milka Caramel-Creme 100gr",
+    "preco": 12.99,
+    "categoria": "Tabletes",
+    "peso": "100g",
+    "ref": "VD-1006",
+    "destaque": "Caramelo cremoso",
+    "descricao": "Tablete com recheio suave de caramelo, excelente para quem busca um chocolate classico e cremoso.",
+    "imagens": [
+      "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_milkacaramelcreme100gr.jpeg?v=1666638362"
+    ]
+  }
+]
