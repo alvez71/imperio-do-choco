@@ -10,7 +10,6 @@
     --shadow: rgba(61, 26, 13, 0.12);
 }
 
-<<<<<<< HEAD
 body[data-theme="dark"] {
     --bg: #100d0b;
     --surface: rgba(24, 20, 18, 0.96);
@@ -23,32 +22,6 @@ body[data-theme="dark"] {
     --shadow: rgba(0, 0, 0, 0.38);
 }
 
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-
-body {
-    min-height: 100vh;
-    background:
-        radial-gradient(circle at top left, rgba(171, 120, 67, 0.18), transparent 34%),
-        linear-gradient(135deg, #f6efe7 0%, #efe5d9 52%, #f8f2ea 100%);
-    color: var(--text);
-}
-
-<<<<<<< HEAD
-body[data-theme="dark"] {
-    background:
-        radial-gradient(circle at top left, rgba(217, 180, 143, 0.12), transparent 32%),
-        linear-gradient(135deg, #100d0b 0%, #181410 54%, #0c0a08 100%);
-}
-
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 .login-page {
     width: min(1120px, 92vw);
     min-height: 100vh;
@@ -258,7 +231,6 @@ body[data-theme="dark"] {
         border-radius: 24px;
     }
 
-<<<<<<< HEAD
         .login-hero h1 {
         max-width: none;
     }
@@ -476,9 +448,3 @@ body[data-theme="dark"] .login-modal__brand img {
         width: 120px;
     }
 }
-=======
-    .login-hero h1 {
-        max-width: none;
-    }
-}
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd

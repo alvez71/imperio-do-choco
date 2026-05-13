@@ -15,13 +15,10 @@ const barraPesquisa = document.getElementById("barra-pesquisa");
 const btnLimparPesquisa = document.getElementById("btn-limpar-pesquisa");
 const btnVerTodos = document.getElementById("btn-ver-todos");
 const container = document.getElementById("container-cards");
-<<<<<<< HEAD
 const vitrineCount = document.getElementById("vitrine-count");
 const vitrineSortButtons = document.querySelectorAll("[data-vitrine-sort]");
 const vitrineScrollButtons = document.querySelectorAll("[data-vitrine-scroll]");
 const instagramLinks = document.querySelectorAll('a[aria-label="Instagram"]');
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 const painelPesquisa = document.getElementById("painel-pesquisa");
 const listaSugestoes = document.getElementById("lista-sugestoes");
 const listaResultadosPesquisa = document.getElementById("lista-resultados-pesquisa");
@@ -35,10 +32,7 @@ const fecharPopupRemocao = document.getElementById("fechar-popup-remocao");
 const popupBoasVindas = document.getElementById("popup-boas-vindas");
 const fecharPopupBoasVindas = document.getElementById("fechar-popup-boas-vindas");
 const btnTema = document.getElementById("btn-tema");
-<<<<<<< HEAD
 const btnFinalizarPedido = document.getElementById("finalizar");
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 const headerSite = document.querySelector(".topo-site");
 const menuMobileToggle = document.getElementById("menu-mobile-toggle");
 const menuMobile = document.getElementById("menu-mobile");
@@ -47,14 +41,10 @@ const menuMobileActionButtons = document.querySelectorAll("[data-mobile-action]"
 const menuMobileLinks = document.querySelectorAll(".menu-mobile__link, .menu-mobile__acao-link");
 const HOME_ROUTE_STORAGE_KEY = "imperio_home_route";
 const THEME_STORAGE_KEY = "imperio_theme";
-<<<<<<< HEAD
 const VITRINE_SORT_STORAGE_KEY = "imperio_vitrine_sort";
 const VITRINE_SORT_OPTIONS = new Set(["recommended", "price-asc"]);
 const CART_SYNC_URL = "carrinho.php";
 const CHECKOUT_URL = "finalizar_pedido.php";
-=======
-const CART_SYNC_URL = "carrinho.php";
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 const rotaHomeAtual = /\.php($|\?)/i.test(window.location.pathname) ? "index.php" : "index.html";
 const HEADER_COMPACT_ENTER_SCROLL = 80;
 const HEADER_COMPACT_EXIT_SCROLL = 28;
@@ -251,23 +241,16 @@ menuMobileActionButtons.forEach((button) => {
     });
 });
 
-<<<<<<< HEAD
 window.addEventListener("scroll", () => {
     atualizarEstadoHeader();
     reposicionarPopupCarrinhoAtivo();
 }, { passive: true });
-=======
-window.addEventListener("scroll", atualizarEstadoHeader, { passive: true });
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 window.addEventListener("resize", () => {
     if (window.innerWidth > 768 && menuMobileAberto()) {
         fecharMenuMobile();
     }
-<<<<<<< HEAD
 
     reposicionarPopupCarrinhoAtivo();
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 });
 window.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && menuMobileAberto()) {
@@ -279,23 +262,15 @@ let carrinho = [];
 let listaChocolates = [];
 let popupCarrinhoTimeout;
 let popupCarrinhoInicio = 0;
-<<<<<<< HEAD
-=======
-let popupCarrinhoTempoRestante = 0;
-let popupCarrinhoUltimoProduto = "";
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 let popupRemocaoTimeout;
 let popupBoasVindasTimeout;
 let sincronizandoCarrinho = false;
 let timeoutFechamentoPesquisa;
 let carregamentoCarrinhoPromise = Promise.resolve();
-<<<<<<< HEAD
 let ordenacaoVitrine = obterOrdenacaoInicial();
 let vitrineArrastando = false;
 let vitrineArrasteInicioX = 0;
 let vitrineScrollInicio = 0;
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 
 const DURACAO_POPUP_CARRINHO = 4000;
 
@@ -307,10 +282,6 @@ function esconderPopupCarrinho() {
 function encerrarPopupCarrinho() {
     clearTimeout(popupCarrinhoTimeout);
     popupCarrinhoInicio = 0;
-<<<<<<< HEAD
-=======
-    popupCarrinhoTempoRestante = 0;
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
     esconderPopupCarrinho();
 }
 
@@ -322,7 +293,6 @@ function animarBarraPopup(duracao, proporcaoInicial = 1) {
     popupCarrinhoBarra.style.transform = "scaleX(0)";
 }
 
-<<<<<<< HEAD
 function posicionarPopupCarrinho() {
     if (!popupCarrinho || !btnCarrinho) {
         return;
@@ -364,25 +334,6 @@ function mostrarPopupCarrinho(nomeProduto, duracao = DURACAO_POPUP_CARRINHO, pro
 
     popupCarrinhoProduto.textContent = nomeProduto;
     posicionarPopupCarrinho();
-=======
-function mostrarPopupCarrinho(nomeProduto, duracao = DURACAO_POPUP_CARRINHO, proporcaoInicial = 1) {
-    clearTimeout(popupCarrinhoTimeout);
-
-    popupCarrinhoUltimoProduto = nomeProduto;
-    popupCarrinhoTempoRestante = duracao;
-
-    if (carrinhoLateral.classList.contains("ativo")) {
-        popupCarrinhoInicio = 0;
-        popupCarrinhoBarra.style.transition = "none";
-        popupCarrinhoBarra.style.transform = `scaleX(${proporcaoInicial})`;
-        esconderPopupCarrinho();
-        return;
-    }
-
-    popupCarrinhoInicio = Date.now();
-
-    popupCarrinhoProduto.textContent = nomeProduto;
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
     popupCarrinho.classList.add("ativo");
     popupCarrinho.setAttribute("aria-hidden", "false");
     animarBarraPopup(duracao, proporcaoInicial);
@@ -395,37 +346,7 @@ function pausarPopupCarrinho() {
         return;
     }
 
-<<<<<<< HEAD
     encerrarPopupCarrinho();
-=======
-    const tempoDecorrido = Date.now() - popupCarrinhoInicio;
-    popupCarrinhoTempoRestante = Math.max(0, popupCarrinhoTempoRestante - tempoDecorrido);
-
-    clearTimeout(popupCarrinhoTimeout);
-
-    if (popupCarrinhoTempoRestante <= 0) {
-        encerrarPopupCarrinho();
-        return;
-    }
-
-    const proporcaoRestante = popupCarrinhoTempoRestante / DURACAO_POPUP_CARRINHO;
-    popupCarrinhoBarra.style.transition = "none";
-    popupCarrinhoBarra.style.transform = `scaleX(${proporcaoRestante})`;
-    popupCarrinhoInicio = 0;
-    esconderPopupCarrinho();
-}
-
-function retomarPopupCarrinho() {
-    if (!popupCarrinhoUltimoProduto || popupCarrinhoTempoRestante <= 0 || carrinhoLateral.classList.contains("ativo")) {
-        return;
-    }
-
-    mostrarPopupCarrinho(
-        popupCarrinhoUltimoProduto,
-        popupCarrinhoTempoRestante,
-        popupCarrinhoTempoRestante / DURACAO_POPUP_CARRINHO
-    );
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 }
 
 function mostrarPopupRemocao(nomeProduto) {
@@ -483,21 +404,15 @@ function normalizarItemCarrinho(item) {
     const nome = String(item?.nome || "").trim();
     const imagem = String(item?.imagem || "").trim();
     const produtoRelacionado = obterDadosProduto(nome, imagem);
-<<<<<<< HEAD
     const produtoIdBruto = item?.produto_id ?? item?.produtoId ?? produtoRelacionado?.id ?? null;
     const produtoId = Number.parseInt(String(produtoIdBruto ?? ""), 10);
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
     const slug = String(item?.slug || produtoRelacionado?.slug || "").trim();
     const chave = String(
         item?.chave || slug || (typeof slugifyProductName === "function" ? slugifyProductName(nome) : nome)
     ).trim();
 
     return {
-<<<<<<< HEAD
         produto_id: Number.isInteger(produtoId) && produtoId > 0 ? produtoId : null,
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
         chave,
         slug,
         nome,
@@ -539,7 +454,6 @@ async function persistirCarrinhoNoServidor() {
     }
 }
 
-<<<<<<< HEAD
 async function finalizarPedido() {
     if (!usuarioTemCarrinhoPersistente()) {
         window.location.href = obterRotasApp().login;
@@ -596,222 +510,6 @@ async function finalizarPedido() {
     }
 }
 
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
-function persistirCarrinhoDeSaida() {
-    if (!usuarioTemCarrinhoPersistente() || sincronizandoCarrinho || !navigator.sendBeacon) {
-        return;
-    }
-
-    const payload = JSON.stringify({
-        itens: obterPayloadCarrinho(),
-    });
-
-    navigator.sendBeacon(CART_SYNC_URL, new Blob([payload], { type: "application/json" }));
-}
-
-async function carregarCarrinhoDaConta() {
-    if (!usuarioTemCarrinhoPersistente()) {
-        return;
-    }
-
-    sincronizandoCarrinho = true;
-
-    try {
-        const resposta = await fetch(CART_SYNC_URL, {
-            credentials: "same-origin",
-            headers: {
-                "Accept": "application/json",
-            },
-        });
-
-        if (!resposta.ok) {
-            return;
-        }
-
-        const dados = await resposta.json();
-        carrinho = Array.isArray(dados.itens)
-            ? dados.itens.map((item) => normalizarItemCarrinho(item)).filter((item) => item.nome && item.chave)
-            : [];
-        atualizarCarrinho(false);
-    } catch (erro) {
-        console.warn("Nao foi possivel carregar o carrinho salvo da conta.", erro);
-    } finally {
-        sincronizandoCarrinho = false;
-    }
-}
-
-<<<<<<< HEAD
-function obterOrdenacaoInicial() {
-    try {
-        const ordenacaoSalva = localStorage.getItem(VITRINE_SORT_STORAGE_KEY);
-
-        if (VITRINE_SORT_OPTIONS.has(ordenacaoSalva)) {
-            return ordenacaoSalva;
-        }
-    } catch (erro) {
-        console.warn("Nao foi possivel ler a ordenacao da vitrine.", erro);
-    }
-
-    return "recommended";
-}
-
-function salvarOrdenacaoVitrine() {
-    try {
-        localStorage.setItem(VITRINE_SORT_STORAGE_KEY, ordenacaoVitrine);
-    } catch (erro) {
-        console.warn("Nao foi possivel salvar a ordenacao da vitrine.", erro);
-    }
-}
-
-function atualizarBotoesOrdenacao() {
-    vitrineSortButtons.forEach((button) => {
-        const ativo = button.dataset.vitrineSort === ordenacaoVitrine;
-        button.classList.toggle("ativo", ativo);
-        button.setAttribute("aria-pressed", ativo ? "true" : "false");
-    });
-}
-
-function ordenarChocolates(chocolates) {
-    const listaOrdenada = [...chocolates];
-
-    if (ordenacaoVitrine === "price-asc") {
-        listaOrdenada.sort((produtoA, produtoB) => {
-            const precoA = Number(produtoA.preco) || 0;
-            const precoB = Number(produtoB.preco) || 0;
-
-            if (precoA !== precoB) {
-                return precoA - precoB;
-            }
-
-            return String(produtoA.nome || "").localeCompare(String(produtoB.nome || ""), "pt-BR");
-        });
-    }
-
-    return listaOrdenada;
-}
-
-function atualizarContadorVitrine(quantidadeExibida) {
-    if (!vitrineCount) {
-        return;
-    }
-
-    vitrineCount.textContent = `Exibindo: ${quantidadeExibida} / ${listaChocolates.length}`;
-}
-
-function escapeHtml(value) {
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-}
-
-function criarResumoCard(produto) {
-    const descricao = String(produto.descricao || "").trim();
-
-    if (descricao) {
-        return descricao;
-    }
-
-    return "Chocolate selecionado para uma experiencia delicada, presenteavel e marcante.";
-}
-
-function obterTotalAvaliacoes(produto, index) {
-    const chave = String(produto.slug || produto.nome || index);
-    const somaCaracteres = [...chave].reduce((total, caractere) => total + caractere.charCodeAt(0), 0);
-
-    return 24 + (somaCaracteres % 38);
-}
-
-function configurarArrasteVitrine() {
-    if (!container) {
-        return;
-    }
-
-    container.addEventListener("pointerdown", (event) => {
-        if (event.button !== 0 || event.target.closest("button")) {
-            return;
-        }
-
-        vitrineArrastando = true;
-        vitrineArrasteInicioX = event.clientX;
-        vitrineScrollInicio = container.scrollLeft;
-        container.setPointerCapture(event.pointerId);
-    });
-
-    container.addEventListener("pointermove", (event) => {
-        if (!vitrineArrastando) {
-            return;
-        }
-
-        const deslocamento = event.clientX - vitrineArrasteInicioX;
-        container.scrollLeft = vitrineScrollInicio - deslocamento;
-    });
-
-    ["pointerup", "pointercancel", "pointerleave"].forEach((evento) => {
-        container.addEventListener(evento, () => {
-            vitrineArrastando = false;
-        });
-    });
-}
-
-function rolarVitrine(direcao) {
-    if (!container) {
-        return;
-    }
-
-    const primeiroCard = container.querySelector(".card");
-    const deslocamento = primeiroCard
-        ? primeiroCard.getBoundingClientRect().width + 22
-        : container.clientWidth * 0.85;
-
-    container.scrollBy({
-        left: direcao === "prev" ? -deslocamento : deslocamento,
-        behavior: "smooth",
-    });
-}
-
-function atualizarSetasVitrine() {
-    if (!container || vitrineScrollButtons.length === 0) {
-        return;
-    }
-
-    const tolerancia = 2;
-    const podeVoltar = container.scrollLeft > tolerancia;
-    const podeAvancar = container.scrollLeft + container.clientWidth < container.scrollWidth - tolerancia;
-
-    vitrineScrollButtons.forEach((button) => {
-        const podeUsar = button.dataset.vitrineScroll === "prev" ? podeVoltar : podeAvancar;
-        button.classList.toggle("vitrine-seta--oculta", !podeUsar);
-        button.disabled = !podeUsar;
-        button.setAttribute("aria-hidden", podeUsar ? "false" : "true");
-        button.setAttribute("tabindex", podeUsar ? "0" : "-1");
-    });
-}
-
-function posicionarSetasVitrine() {
-    if (!container) {
-        return;
-    }
-
-    const vitrine = document.getElementById("vitrine");
-    const primeiraImagem = container.querySelector(".card__imagem-box");
-
-    if (!vitrine || !primeiraImagem) {
-        return;
-    }
-
-    const vitrineRect = vitrine.getBoundingClientRect();
-    const imagemRect = primeiraImagem.getBoundingClientRect();
-    const centroImagem = imagemRect.top + imagemRect.height / 2 - vitrineRect.top;
-
-    vitrine.style.setProperty("--vitrine-setas-top", `${centroImagem}px`);
-}
-
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 function normalizarTextoBusca(valor) {
     return String(valor || "")
         .normalize("NFD")
@@ -836,249 +534,12 @@ function aplicarPesquisa() {
     btnLimparPesquisa.classList.toggle("oculto", !texto);
 }
 
-<<<<<<< HEAD
 function obterChocolatesVisiveisPelaBusca() {
     const texto = normalizarTextoBusca(barraPesquisa.value);
 
     return texto
         ? listaChocolates.filter((choc) => produtoCorrespondeBusca(choc, texto))
         : [...listaChocolates];
-}
-
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
-function criarSugestoes(texto) {
-    const nomes = listaChocolates.map((choc) => choc.nome);
-
-    if (!texto) {
-        return [...new Set(nomes)].slice(0, 5);
-    }
-
-    return [...new Set(
-        nomes.filter((nome) => normalizarTextoBusca(nome).includes(texto))
-    )].slice(0, 5);
-}
-
-function renderizarAtalhosPesquisa() {
-    if (!listaAtalhosPesquisa) {
-        return;
-    }
-
-    listaAtalhosPesquisa.innerHTML = "";
-
-    const atalhos = [...new Set(
-        listaChocolates
-            .map((item) => String(item.categoria || "").trim())
-            .filter(Boolean)
-    )].slice(0, 5);
-
-    atalhos.forEach((atalho) => {
-        const botao = document.createElement("button");
-        botao.type = "button";
-        botao.className = "pesquisa-atalho";
-        botao.textContent = atalho;
-        botao.addEventListener("click", () => {
-            barraPesquisa.value = atalho;
-            aplicarPesquisa();
-            barraPesquisa.focus();
-        });
-        listaAtalhosPesquisa.appendChild(botao);
-    });
-}
-
-function renderizarSugestoes(sugestoes) {
-    listaSugestoes.innerHTML = "";
-
-    if (sugestoes.length === 0) {
-        listaSugestoes.innerHTML = "<p class=\"painel-vazio\">Nenhuma sugestao encontrada.</p>";
-        return;
-    }
-
-    sugestoes.forEach((sugestao) => {
-        const botao = document.createElement("button");
-        botao.type = "button";
-        botao.className = "sugestao-item";
-        botao.innerHTML = `<strong>${sugestao.split(" ")[0]}</strong> ${sugestao.split(" ").slice(1).join(" ")}`.trim();
-        botao.addEventListener("click", () => {
-            barraPesquisa.value = sugestao;
-            aplicarPesquisa();
-        });
-        listaSugestoes.appendChild(botao);
-    });
-}
-
-function renderizarResultadosPesquisa(chocolates) {
-    listaResultadosPesquisa.innerHTML = "";
-
-    if (chocolates.length === 0) {
-        listaResultadosPesquisa.innerHTML = "<p class=\"painel-vazio\">Nenhum produto encontrado.</p>";
-        return;
-    }
-
-    chocolates.slice(0, 5).forEach((choc) => {
-        const nomeSerializado = JSON.stringify(choc.nome);
-        const imagemSerializada = JSON.stringify(choc.imagem);
-        const item = document.createElement("div");
-        item.className = "resultado-pesquisa";
-        item.innerHTML = `
-            <a class="resultado-pesquisa__link" href="produto.html?id=${encodeURIComponent(choc.slug)}">
-                <img class="resultado-pesquisa__imagem" src="${choc.imagem}" alt="${choc.nome}">
-                <div class="resultado-pesquisa__info">
-                    <h4>${choc.nome}</h4>
-                    <p>R$ ${choc.preco.toFixed(2).replace(".", ",")}</p>
-                </div>
-            </a>
-            <button type="button" class="resultado-pesquisa__botao" onclick='adicionarAoCarrinho(${nomeSerializado}, ${choc.preco}, ${imagemSerializada})'>+</button>
-        `;
-        listaResultadosPesquisa.appendChild(item);
-    });
-}
-
-function atualizarPainelPesquisa(texto, filtrados) {
-    btnVerTodos.textContent = `Veja todos os ${texto ? filtrados.length : listaChocolates.length} produtos`;
-    renderizarSugestoes(criarSugestoes(texto));
-    renderizarResultadosPesquisa(texto ? filtrados : listaChocolates);
-}
-
-function abrirOverlayPesquisa() {
-    if (carrinhoLateral.classList.contains("ativo")) {
-        fecharPainelCarrinho();
-    }
-
-    if (menuMobileAberto()) {
-        fecharMenuMobile();
-    }
-
-    clearTimeout(timeoutFechamentoPesquisa);
-    fecharPesquisa.classList.remove("overlay-pesquisa__fechar--fechando");
-    overlayPesquisa.classList.remove("oculto");
-    overlayPesquisa.classList.remove("overlay-pesquisa--visivel");
-    document.body.classList.add("sem-rolagem");
-    atualizarPainelPesquisa(normalizarTextoBusca(barraPesquisa.value), listaChocolates);
-    requestAnimationFrame(() => {
-        overlayPesquisa.classList.add("overlay-pesquisa--visivel");
-    });
-    barraPesquisa.focus();
-}
-
-function fecharOverlayPesquisa() {
-    overlayPesquisa.classList.remove("overlay-pesquisa--visivel");
-
-    clearTimeout(timeoutFechamentoPesquisa);
-    timeoutFechamentoPesquisa = window.setTimeout(() => {
-        overlayPesquisa.classList.add("oculto");
-    }, 280);
-
-    if (!carrinhoLateral.classList.contains("ativo")) {
-        document.body.classList.remove("sem-rolagem");
-    }
-}
-
-function limparPesquisa() {
-    barraPesquisa.value = "";
-    btnLimparPesquisa.classList.add("oculto");
-    renderizarChocolates(listaChocolates);
-    atualizarPainelPesquisa("", listaChocolates);
-    barraPesquisa.focus();
-}
-
-function renderizarChocolates(chocolates) {
-    container.innerHTML = "";
-<<<<<<< HEAD
-    container.scrollLeft = 0;
-    const chocolatesOrdenados = ordenarChocolates(chocolates);
-    atualizarContadorVitrine(chocolatesOrdenados.length);
-
-    if (chocolatesOrdenados.length === 0) {
-        container.innerHTML = "<p>Nenhum chocolate encontrado.</p>";
-        atualizarSetasVitrine();
-        return;
-    }
-
-    chocolatesOrdenados.forEach((choc, index) => {
-        const quantidade = obterQuantidadeNoCarrinho(choc.nome);
-        const card = document.createElement("article");
-        const descricao = criarResumoCard(choc);
-        const totalAvaliacoes = obterTotalAvaliacoes(choc, index);
-        card.className = "card";
-        card.style.setProperty("--card-stagger-index", String(index % 12));
-        card.innerHTML = `
-            <a class="card__imagem-link" href="produto.html?id=${encodeURIComponent(choc.slug)}">
-                <div class="card__imagem-box">
-                    <img src="${escapeHtml(choc.imagem)}" alt="${escapeHtml(choc.nome)}">
-                </div>
-            </a>
-            <div class="card__conteudo">
-                <a class="card__link" href="produto.html?id=${encodeURIComponent(choc.slug)}">
-                    <p class="card__descricao">${escapeHtml(descricao)}</p>
-                    <div class="card__linha">
-                        <h3>${escapeHtml(choc.nome)}</h3>
-                        <p class="card__preco">R$ ${Number(choc.preco || 0).toFixed(2).replace(".", ",")}</p>
-                    </div>
-                    <div class="card__rating" aria-label="Avaliacao maxima com ${totalAvaliacoes} avaliacoes">
-                        <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span>${totalAvaliacoes}</span>
-                    </div>
-                    <span class="card__selo">${escapeHtml(choc.destaque)}</span>
-                    <span class="card__quantidade-info">${quantidade > 0 ? `${quantidade} na sacola` : "Disponivel agora"}</span>
-                </a>
-            </div>
-        `;
-        const botaoAdicionar = document.createElement("button");
-        botaoAdicionar.type = "button";
-        botaoAdicionar.className = "card__cta";
-        botaoAdicionar.textContent = "+";
-        botaoAdicionar.setAttribute("aria-label", `Adicionar ${choc.nome} ao carrinho`);
-        botaoAdicionar.addEventListener("click", (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            adicionarAoCarrinho(choc.nome, choc.preco, choc.imagem);
-        });
-        card.querySelector(".card__conteudo").appendChild(botaoAdicionar);
-        container.appendChild(card);
-    });
-
-    requestAnimationFrame(() => {
-        posicionarSetasVitrine();
-        atualizarSetasVitrine();
-    });
-=======
-
-    if (chocolates.length === 0) {
-        container.innerHTML = "<p>Nenhum chocolate encontrado.</p>";
-        return;
-    }
-
-    chocolates.forEach((choc, index) => {
-        const nomeSerializado = JSON.stringify(choc.nome);
-        const imagemSerializada = JSON.stringify(choc.imagem);
-        const quantidade = obterQuantidadeNoCarrinho(choc.nome);
-        const card = document.createElement("div");
-        card.className = "card";
-        card.style.setProperty("--card-stagger-index", String(index % 12));
-        card.innerHTML = `
-            <a class="card__link" href="produto.html?id=${encodeURIComponent(choc.slug)}">
-                <div class="card__imagem-box">
-                    <img src="${choc.imagem}" alt="${choc.nome}">
-                </div>
-                <span class="card__selo">${choc.destaque}</span>
-                <div class="card__conteudo">
-                    <h3>${choc.nome}</h3>
-                    <div class="card__rodape">
-                        <div class="card__preco-bloco">
-                            <p>R$ ${choc.preco.toFixed(2).replace(".", ",")}</p>
-                            <span class="card__quantidade-info">${quantidade > 0 ? `${quantidade} na sacola` : "Disponivel agora"}</span>
-                        </div>
-                        <button type="button" class="card__cta" onclick='event.preventDefault(); event.stopPropagation(); adicionarAoCarrinho(${nomeSerializado}, ${choc.preco}, ${imagemSerializada})' aria-label="Adicionar ${choc.nome} ao carrinho">
-                            Adicionar a sacola
-                        </button>
-                    </div>
-                </div>
-            </a>
-        `;
-        container.appendChild(card);
-    });
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 }
 
 function formatarPreco(valor) {
@@ -1161,11 +622,7 @@ async function carregarChocolates() {
 
 window.adicionarAoCarrinho = function (nome, preco, imagem) {
     const itemExistente = carrinho.find((item) => item.nome === nome);
-<<<<<<< HEAD
     const produtoEntrouNaSacola = !itemExistente;
-=======
-    const deveExibirPopup = !itemExistente;
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 
     if (itemExistente) {
         itemExistente.qtd++;
@@ -1182,11 +639,7 @@ window.adicionarAoCarrinho = function (nome, preco, imagem) {
 
     atualizarCarrinho();
 
-<<<<<<< HEAD
     if (produtoEntrouNaSacola) {
-=======
-    if (deveExibirPopup) {
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
         mostrarPopupCarrinho(nome);
     } else {
         mostrarPopupAcao("Produto foi adicionado ao carrinho !!!");
@@ -1419,18 +872,12 @@ async function abrirCarrinho() {
 }
 
 function fecharPainelCarrinho() {
-<<<<<<< HEAD
     if (!carrinhoLateral.classList.contains("ativo")) {
         return;
     }
 
     carrinhoLateral.classList.remove("ativo");
     overlayCarrinho.classList.remove("ativo");
-=======
-    carrinhoLateral.classList.remove("ativo");
-    overlayCarrinho.classList.remove("ativo");
-    retomarPopupCarrinho();
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 
     if (overlayPesquisa.classList.contains("oculto") && !menuMobileAberto()) {
         document.body.classList.remove("sem-rolagem");
@@ -1451,11 +898,7 @@ fecharCarrinho.addEventListener("click", fecharPainelCarrinho);
 overlayCarrinho.addEventListener("click", fecharPainelCarrinho);
 
 document.addEventListener("click", (e) => {
-<<<<<<< HEAD
     if (carrinhoLateral.classList.contains("ativo") && !carrinhoLateral.contains(e.target) && !btnCarrinho.contains(e.target)) {
-=======
-    if (!carrinhoLateral.contains(e.target) && !btnCarrinho.contains(e.target)) {
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
         fecharPainelCarrinho();
     }
 
@@ -1464,7 +907,6 @@ document.addEventListener("click", (e) => {
     }
 });
 
-<<<<<<< HEAD
 atualizarBotoesOrdenacao();
 configurarArrasteVitrine();
 posicionarSetasVitrine();
@@ -1513,48 +955,6 @@ instagramLinks.forEach((link) => {
     });
 });
 
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
-barraPesquisa.addEventListener("input", aplicarPesquisa);
-barraPesquisa.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        aplicarPesquisa();
-    }
-});
-abrirPesquisa.addEventListener("click", abrirOverlayPesquisa);
-fecharPesquisa.addEventListener("click", () => {
-    fecharPesquisa.classList.add("overlay-pesquisa__fechar--fechando");
-    window.setTimeout(() => {
-        fecharOverlayPesquisa();
-    }, 120);
-});
-barraPesquisa.addEventListener("focus", aplicarPesquisa);
-btnLimparPesquisa.addEventListener("click", limparPesquisa);
-btnVerTodos.addEventListener("click", () => {
-    renderizarChocolates(listaChocolates);
-    fecharOverlayPesquisa();
-});
-if (fecharPopupRemocao && popupRemocao) {
-    fecharPopupRemocao.addEventListener("click", () => {
-        clearTimeout(popupRemocaoTimeout);
-        popupRemocao.classList.remove("ativo");
-        popupRemocao.setAttribute("aria-hidden", "true");
-    });
-}
-
-if (fecharPopupBoasVindas) {
-    fecharPopupBoasVindas.addEventListener("click", fecharPopupBoasVindasComEstado);
-}
-
-<<<<<<< HEAD
-if (btnFinalizarPedido) {
-    btnFinalizarPedido.addEventListener("click", () => {
-        void finalizarPedido();
-    });
-}
-
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 window.addEventListener("storage", carregarChocolates);
 window.addEventListener("pagehide", persistirCarrinhoDeSaida);
 window.addEventListener("beforeunload", persistirCarrinhoDeSaida);

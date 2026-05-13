@@ -17,7 +17,6 @@ try {
     $stmt = $pdo->query("SELECT DATABASE() AS banco_atual");
     $resultado = $stmt->fetch();
     echo "Banco atual: " . ($resultado["banco_atual"] ?? "desconhecido") . "\n";
-<<<<<<< HEAD
 
     $tabelasObrigatorias = ["usuarios", "produtos", "carrinho_itens", "enderecos", "pedidos", "pedido_itens", "estoque_movimentacoes"];
     $tabelasAusentes = listarTabelasAusentes($pdo, $tabelasObrigatorias);
@@ -29,8 +28,6 @@ try {
         echo "Tabelas ausentes: " . implode(", ", $tabelasAusentes) . "\n";
         echo "Execute: C:\\xampp\\php\\php.exe database\\migrate.php\n";
     }
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 } catch (PDOException $exception) {
     echo "Conectou, mas nao foi possivel consultar o banco atual.\n";
 }

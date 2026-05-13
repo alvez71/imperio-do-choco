@@ -3,29 +3,22 @@ declare(strict_types=1);
 
 session_start();
 
-<<<<<<< HEAD
 require_once __DIR__ . "/conexao.php";
 
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
-if (!isset($_SESSION["usuario_id"])) {
+$usuarioId = (int) ($_SESSION["usuario_id"] ?? 0);
+$nomeUsuario = (string) ($_SESSION["usuario_nome"] ?? "");
+$emailUsuario = (string) ($_SESSION["usuario_email"] ?? "");
+$papelUsuario = (string) ($_SESSION["usuario_papel"] ?? "cliente");
+
+if ($usuarioId <= 0) {
     header("Location: login.php");
     exit;
 }
-
-$nomeUsuario = (string) ($_SESSION["usuario_nome"] ?? "Cliente");
-$emailUsuario = (string) ($_SESSION["usuario_email"] ?? "");
-$papelUsuario = (string) ($_SESSION["usuario_papel"] ?? "cliente");
-<<<<<<< HEAD
-$usuarioId = (int) ($_SESSION["usuario_id"] ?? 0);
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 
 if ($papelUsuario === "admin") {
     header("Location: admin.php");
     exit;
 }
-<<<<<<< HEAD
 
 function buscarEnderecosConta(PDO $pdo, int $usuarioId): array
 {
@@ -155,41 +148,29 @@ $pedidos = $bancoDisponivel ? buscarPedidosConta($pdo, $usuarioId) : [];
 $pedidoSelecionado = isset($_GET["pedido_id"]) ? (int) $_GET["pedido_id"] : 0;
 $itensPedidoSelecionado = $pedidoSelecionado > 0 && $bancoDisponivel ? buscarItensPedidoConta($pdo, $pedidoSelecionado, $usuarioId) : [];
 $mostrarFormularioEndereco = $_SERVER["REQUEST_METHOD"] === "POST";
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="admin.css">
-    <title>Minha Conta | Velle Dulcis</title>
+    <title>Minha conta | Velle Dulcis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css?v=20260417-5">
 </head>
-<<<<<<< HEAD
-<body class="account-page">
-    <script src="theme-init.js"></script>
-    <div class="admin-shell admin-shell--account">
-=======
-<body>
+<body class="admin-page admin-page--account">
     <div class="admin-shell">
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
         <div class="admin-topbar">
             <a class="admin-topbar__voltar" href="index.php">Voltar para a vitrine</a>
 
             <div class="admin-topbar__acoes">
-<<<<<<< HEAD
                 <span class="admin-topbar__usuario"><?php echo htmlspecialchars($nomeUsuario, ENT_QUOTES, "UTF-8"); ?></span>
-=======
-                <span class="admin-topbar__usuario">
-                    <?php echo htmlspecialchars($nomeUsuario, ENT_QUOTES, "UTF-8"); ?>
-                </span>
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
                 <a class="admin-topbar__sair" href="logout.php">Sair</a>
             </div>
         </div>
 
-<<<<<<< HEAD
         <section class="admin-card admin-card--account account-section">
             <div class="admin-card__header admin-card__header--account-page">
                 <div>
@@ -422,16 +403,5 @@ $mostrarFormularioEndereco = $_SERVER["REQUEST_METHOD"] === "POST";
             });
         }());
     </script>
-=======
-        <div class="form-container">
-            <h2>Minha conta</h2>
-            <p class="form-container__intro">Sua conta foi criada com sucesso. Aqui podemos conectar historico de pedidos, favoritos e dados do cliente nos proximos passos.</p>
-
-            <input type="text" value="<?php echo htmlspecialchars($nomeUsuario, ENT_QUOTES, "UTF-8"); ?>" readonly>
-            <input type="email" value="<?php echo htmlspecialchars($emailUsuario, ENT_QUOTES, "UTF-8"); ?>" readonly>
-            <input type="text" value="Perfil: cliente" readonly>
-        </div>
-    </div>
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 </body>
 </html>
