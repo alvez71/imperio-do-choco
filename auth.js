@@ -28,7 +28,7 @@ function obterSessaoAutenticada() {
     try {
         return JSON.parse(localStorage.getItem(STORAGE_KEY_AUTH)) || null;
     } catch (erro) {
-        console.warn("Nao foi possivel ler a sessao atual.", erro);
+        console.warn("Não foi possível ler a sessão atual.", erro);
         return null;
     }
 }

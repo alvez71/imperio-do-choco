@@ -60,7 +60,7 @@ $nomeUsuario = (string) ($_SESSION["usuario_nome"] ?? "Administrador");
             <article class="admin-metric-card">
                 <span class="admin-metric-card__label">Categorias</span>
                 <strong id="admin-total-categorias" class="admin-metric-card__value">0</strong>
-                <p class="admin-metric-card__text">Variedade atual de grupos no catalogo.</p>
+                <p class="admin-metric-card__text">Variedade atual de grupos no catálogo.</p>
             </article>
         </section>
 
@@ -106,13 +106,13 @@ $nomeUsuario = (string) ($_SESSION["usuario_nome"] ?? "Administrador");
                         </label>
 
                         <label class="admin-field" for="preco">
-                            <span class="admin-field__label">Preco</span>
+                            <span class="admin-field__label">Preço</span>
                             <input type="number" id="preco" placeholder="Ex: 25.90" step="0.01" min="0.01" inputmode="decimal" required>
                         </label>
 
                         <label class="admin-field" for="categoria">
                             <span class="admin-field__label">Categoria</span>
-                            <input type="text" id="categoria" placeholder="Ex: Ovos de Pascoa">
+                            <input type="text" id="categoria" placeholder="Ex: Ovos de Páscoa">
                         </label>
 
                         <label class="admin-field" for="peso">
@@ -131,8 +131,8 @@ $nomeUsuario = (string) ($_SESSION["usuario_nome"] ?? "Administrador");
                         </label>
 
                         <label class="admin-field admin-field--full" for="descricao">
-                            <span class="admin-field__label">Descricao</span>
-                            <textarea id="descricao" placeholder="Descricao do produto"></textarea>
+                            <span class="admin-field__label">Descrição</span>
+                            <textarea id="descricao" placeholder="Descrição do produto"></textarea>
                         </label>
 
                         <label class="admin-field admin-field--full" for="galeria">
@@ -163,27 +163,27 @@ $nomeUsuario = (string) ($_SESSION["usuario_nome"] ?? "Administrador");
                     </div>
 
                     <div class="admin-preview__body">
-                        <span id="admin-preview-destaque" class="admin-preview__badge">Selecao da casa</span>
+                        <span id="admin-preview-destaque" class="admin-preview__badge">Seleção da casa</span>
                         <h3 id="admin-preview-nome">Chocolate sem nome</h3>
                         <p id="admin-preview-preco" class="admin-preview__preco">R$ 0,00</p>
 
                         <div class="admin-preview__meta">
                             <span id="admin-preview-categoria">Categoria</span>
-                            <span id="admin-preview-peso">Peso nao informado</span>
+                            <span id="admin-preview-peso">Peso não informado</span>
                         </div>
 
                         <p id="admin-preview-descricao" class="admin-preview__descricao">
-                            Adicione imagem, destaque e descricao para acompanhar o produto antes de publicar.
+                            Adicione imagem, destaque e descrição para acompanhar o produto antes de publicar.
                         </p>
 
                         <dl class="admin-preview__details">
                             <div>
                                 <dt>Slug</dt>
-                                <dd id="admin-preview-slug">sera-gerado-automaticamente</dd>
+                                <dd id="admin-preview-slug">será gerado automaticamente</dd>
                             </div>
                             <div>
                                 <dt>Referencia</dt>
-                                <dd id="admin-preview-ref">sera-gerada-automaticamente</dd>
+                                <dd id="admin-preview-ref">será gerada automaticamente</dd>
                             </div>
                             <div>
                                 <dt>Galeria</dt>
@@ -198,19 +198,19 @@ $nomeUsuario = (string) ($_SESSION["usuario_nome"] ?? "Administrador");
         <section class="admin-card" aria-labelledby="admin-lista-titulo">
             <div class="admin-card__header">
                 <div>
-                    <p class="admin-card__eyebrow">Gestao de catalogo</p>
+                    <p class="admin-card__eyebrow">Gestão de catálogo</p>
                     <h2 id="admin-lista-titulo">Produtos cadastrados</h2>
                 </div>
             </div>
 
             <p class="form-container__intro">
-                Pesquise por nome, categoria, slug ou referencia. O painel combina catalogo base, produtos do banco e ajustes locais sem perder o controle de cada origem.
+                Pesquise por nome, categoria, slug ou referência. O painel combina catálogo base, produtos do banco e ajustes locais sem perder o controle de cada origem.
             </p>
 
             <div class="admin-list-toolbar">
                 <label class="admin-search-field" for="admin-busca">
                     <span class="admin-search-field__label">Buscar produto</span>
-                    <input id="admin-busca" type="search" placeholder="Nome, categoria, slug ou referencia">
+                    <input id="admin-busca" type="search" placeholder="Nome, categoria, slug ou referência">
                 </label>
 
                 <label class="admin-select-field" for="admin-filtro-origem">
@@ -218,7 +218,7 @@ $nomeUsuario = (string) ($_SESSION["usuario_nome"] ?? "Administrador");
                     <select id="admin-filtro-origem">
                         <option value="todos">Todos</option>
                         <option value="locais">Somente locais</option>
-                        <option value="catalogo">Somente catalogo</option>
+                        <option value="catalogo">Somente catálogo</option>
                     </select>
                 </label>
 
@@ -226,8 +226,8 @@ $nomeUsuario = (string) ($_SESSION["usuario_nome"] ?? "Administrador");
                     <span class="admin-search-field__label">Ordenar por</span>
                     <select id="admin-ordenacao">
                         <option value="nome-asc">Nome (A-Z)</option>
-                        <option value="preco-desc">Maior preco</option>
-                        <option value="preco-asc">Menor preco</option>
+                        <option value="preco-desc">Maior preço</option>
+                        <option value="preco-asc">Menor preço</option>
                         <option value="categoria">Categoria</option>
                     </select>
                 </label>

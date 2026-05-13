@@ -19,6 +19,7 @@ const painelPesquisa = document.getElementById("painel-pesquisa");
 const listaSugestoes = document.getElementById("lista-sugestoes");
 const listaResultadosPesquisa = document.getElementById("lista-resultados-pesquisa");
 const listaAtalhosPesquisa = document.getElementById("lista-atalhos-pesquisa");
+const filtrosCategoria = document.getElementById("filtros-categoria");
 const popupCarrinho = document.getElementById("popup-carrinho");
 const popupCarrinhoProduto = document.getElementById("popup-carrinho-produto");
 const popupCarrinhoBarra = document.getElementById("popup-carrinho-barra");
@@ -50,6 +51,7 @@ sessionStorage.setItem(HOME_ROUTE_STORAGE_KEY, rotaHomeAtual);
 
 let timeoutAnimacaoTema;
 let timeoutFechamentoMenuMobile;
+let categoriaAtiva = "";
 
 function aplicarTema(theme) {
     document.body.setAttribute("data-theme", theme);
@@ -70,7 +72,7 @@ function obterTemaInicial() {
         return temaSalvo;
     }
 
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return "light";
 }
 
 function prefereMovimentoReduzido() {
@@ -432,10 +434,10 @@ async function persistirCarrinhoNoServidor() {
         });
 
         if (!resposta.ok) {
-            console.warn("Nao foi possivel salvar o carrinho da conta.", resposta.status);
+            console.warn("Não foi possível salvar o carrinho da conta.", resposta.status);
         }
     } catch (erro) {
-        console.warn("Nao foi possivel salvar o carrinho da conta.", erro);
+        console.warn("Não foi possível salvar o carrinho da conta.", erro);
     }
 }
 
@@ -476,7 +478,7 @@ async function carregarCarrinhoDaConta() {
             : [];
         atualizarCarrinho(false);
     } catch (erro) {
-        console.warn("Nao foi possivel carregar o carrinho salvo da conta.", erro);
+        console.warn("Não foi possível carregar o carrinho salvo da conta.", erro);
     } finally {
         sincronizandoCarrinho = false;
     }
@@ -495,11 +497,22 @@ function produtoCorrespondeBusca(produto, termoBusca) {
     return campos.some((campo) => normalizarTextoBusca(campo).includes(termoBusca));
 }
 
+function produtoCorrespondeCategoria(produto, categoria) {
+    return !categoria || normalizarTextoBusca(produto.categoria) === categoria;
+}
+
+function obterChocolatesFiltrados(termoBusca = normalizarTextoBusca(barraPesquisa.value)) {
+    return listaChocolates.filter((choc) => {
+        const correspondeCategoria = produtoCorrespondeCategoria(choc, categoriaAtiva);
+        const correspondeBusca = !termoBusca || produtoCorrespondeBusca(choc, termoBusca);
+
+        return correspondeCategoria && correspondeBusca;
+    });
+}
+
 function aplicarPesquisa() {
     const texto = normalizarTextoBusca(barraPesquisa.value);
-    const filtrados = texto
-        ? listaChocolates.filter((choc) => produtoCorrespondeBusca(choc, texto))
-        : [...listaChocolates];
+    const filtrados = obterChocolatesFiltrados(texto);
 
     renderizarChocolates(filtrados);
     atualizarPainelPesquisa(texto, filtrados);
@@ -545,11 +558,66 @@ function renderizarAtalhosPesquisa() {
     });
 }
 
+function atualizarEstadoFiltrosCategoria() {
+    if (!filtrosCategoria) {
+        return;
+    }
+
+    filtrosCategoria.querySelectorAll(".filtro-categoria").forEach((botao) => {
+        const ativo = botao.dataset.categoria === categoriaAtiva;
+        botao.classList.toggle("ativo", ativo);
+        botao.setAttribute("aria-pressed", ativo ? "true" : "false");
+    });
+}
+
+function renderizarFiltrosCategoria() {
+    if (!filtrosCategoria) {
+        return;
+    }
+
+    const categorias = [...new Set(
+        listaChocolates
+            .map((item) => String(item.categoria || "").trim())
+            .filter(Boolean)
+    )];
+
+    filtrosCategoria.innerHTML = "";
+
+    if (categorias.length < 2) {
+        filtrosCategoria.hidden = true;
+        return;
+    }
+
+    filtrosCategoria.hidden = false;
+
+    [{ label: "Todos", valor: "" }, ...categorias.map((categoria) => ({ label: categoria, valor: normalizarTextoBusca(categoria) }))]
+        .forEach((filtro) => {
+            const botao = document.createElement("button");
+            botao.type = "button";
+            botao.className = "filtro-categoria";
+            botao.dataset.categoria = filtro.valor;
+            botao.textContent = filtro.label;
+            botao.setAttribute("aria-pressed", filtro.valor === categoriaAtiva ? "true" : "false");
+            botao.addEventListener("click", () => {
+                categoriaAtiva = filtro.valor;
+                const termoBusca = normalizarTextoBusca(barraPesquisa.value);
+                const filtrados = obterChocolatesFiltrados(termoBusca);
+
+                renderizarChocolates(filtrados);
+                atualizarPainelPesquisa(termoBusca, filtrados);
+                atualizarEstadoFiltrosCategoria();
+            });
+            filtrosCategoria.appendChild(botao);
+        });
+
+    atualizarEstadoFiltrosCategoria();
+}
+
 function renderizarSugestoes(sugestoes) {
     listaSugestoes.innerHTML = "";
 
     if (sugestoes.length === 0) {
-        listaSugestoes.innerHTML = "<p class=\"painel-vazio\">Nenhuma sugestao encontrada.</p>";
+        listaSugestoes.innerHTML = "<p class=\"painel-vazio\">Nenhuma sugestão encontrada.</p>";
         return;
     }
 
@@ -636,8 +704,9 @@ function fecharOverlayPesquisa() {
 function limparPesquisa() {
     barraPesquisa.value = "";
     btnLimparPesquisa.classList.add("oculto");
-    renderizarChocolates(listaChocolates);
-    atualizarPainelPesquisa("", listaChocolates);
+    const filtrados = obterChocolatesFiltrados("");
+    renderizarChocolates(filtrados);
+    atualizarPainelPesquisa("", filtrados);
     barraPesquisa.focus();
 }
 
@@ -667,10 +736,10 @@ function renderizarChocolates(chocolates) {
                     <div class="card__rodape">
                         <div class="card__preco-bloco">
                             <p>R$ ${choc.preco.toFixed(2).replace(".", ",")}</p>
-                            <span class="card__quantidade-info">${quantidade > 0 ? `${quantidade} na sacola` : "Disponivel agora"}</span>
+                            <span class="card__quantidade-info">${quantidade > 0 ? `${quantidade} na sacola` : "Disponível agora"}</span>
                         </div>
                         <button type="button" class="card__cta" onclick='event.preventDefault(); event.stopPropagation(); adicionarAoCarrinho(${nomeSerializado}, ${choc.preco}, ${imagemSerializada})' aria-label="Adicionar ${choc.nome} ao carrinho">
-                            Adicionar a sacola
+                            Adicionar à sacola
                         </button>
                     </div>
                 </div>
@@ -755,6 +824,7 @@ async function carregarChocolates() {
     listaChocolates = await carregarTodosChocolates();
     renderizarChocolates(listaChocolates);
     renderizarAtalhosPesquisa();
+    renderizarFiltrosCategoria();
     atualizarCarrinho(false);
 }
 
@@ -800,14 +870,14 @@ function atualizarCarrinho(devePersistir = true) {
         listaCarrinho.innerHTML = `
             <li class="carrinho-vazio">
                 <div class="carrinho-vazio__resumo">
-                    <p class="carrinho-vazio__frete">Continue explorando para montar sua selecao especial.</p>
-                    <h4>Sua sacola esta vazia!</h4>
-                    <p>Adicione seus chocolates favoritos para comecar seu pedido.</p>
+                    <p class="carrinho-vazio__frete">Continue explorando para montar sua seleção especial.</p>
+                    <h4>Sua sacola está vazia!</h4>
+                    <p>Adicione seus chocolates favoritos para começar seu pedido.</p>
                     <button type="button" class="carrinho-vazio__cta" onclick="abrirVitrinePrincipal()">Explorar vitrine</button>
                 </div>
 
                 <div class="carrinho-vazio__sugestoes">
-                    <p class="carrinho-vazio__titulo">Voce tambem pode gostar</p>
+                    <p class="carrinho-vazio__titulo">Você também pode gostar</p>
                     ${sugestoes.map((item) => `
                         <article class="carrinho-vazio__item">
                             <img src="${item.imagem}" alt="${item.nome}">
@@ -1058,7 +1128,11 @@ fecharPesquisa.addEventListener("click", () => {
 barraPesquisa.addEventListener("focus", aplicarPesquisa);
 btnLimparPesquisa.addEventListener("click", limparPesquisa);
 btnVerTodos.addEventListener("click", () => {
+    categoriaAtiva = "";
+    barraPesquisa.value = "";
+    btnLimparPesquisa.classList.add("oculto");
     renderizarChocolates(listaChocolates);
+    atualizarEstadoFiltrosCategoria();
     fecharOverlayPesquisa();
 });
 if (fecharPopupRemocao && popupRemocao) {

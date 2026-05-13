@@ -36,11 +36,11 @@ function garantirTabelaCarrinho(PDO $pdo): void
 }
 
 if (!isset($_SESSION["usuario_id"])) {
-    responderJson(["erro" => "Usuario nao autenticado."], 401);
+    responderJson(["erro" => "Usuário não autenticado."], 401);
 }
 
 if (!bancoDeDadosDisponivel($pdo)) {
-    responderJson(["erro" => "Banco de dados indisponivel."], 503);
+    responderJson(["erro" => "Banco de dados indisponível."], 503);
 }
 
 $usuarioId = (int) $_SESSION["usuario_id"];
@@ -48,7 +48,7 @@ $usuarioId = (int) $_SESSION["usuario_id"];
 try {
     garantirTabelaCarrinho($pdo);
 } catch (PDOException $exception) {
-    responderJson(["erro" => "Nao foi possivel preparar o carrinho."], 500);
+    responderJson(["erro" => "Não foi possível preparar o carrinho."], 500);
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
@@ -74,12 +74,12 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
         responderJson(["itens" => $itens]);
     } catch (PDOException $exception) {
-        responderJson(["erro" => "Nao foi possivel carregar o carrinho."], 500);
+        responderJson(["erro" => "Não foi possível carregar o carrinho."], 500);
     }
 }
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    responderJson(["erro" => "Metodo nao permitido."], 405);
+    responderJson(["erro" => "Método não permitido."], 405);
 }
 
 $conteudoBruto = file_get_contents("php://input");
@@ -153,5 +153,5 @@ try {
         $pdo->rollBack();
     }
 
-    responderJson(["erro" => "Nao foi possivel salvar o carrinho."], 500);
+    responderJson(["erro" => "Não foi possível salvar o carrinho."], 500);
 }

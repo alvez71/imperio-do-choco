@@ -19,7 +19,7 @@ try {
         ]
     );
 } catch (PDOException $exception) {
-    $databaseConnectionError = "Erro na conexao com o banco de dados.";
+    $databaseConnectionError = "Erro na conexão com o banco de dados.";
 }
 
 function bancoDeDadosDisponivel($pdo): bool

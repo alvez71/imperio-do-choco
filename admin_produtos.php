@@ -130,7 +130,7 @@ function normalizarPayloadProdutoAdmin(array $dados): array
 function validarPayloadProdutoAdmin(array $produto): ?string
 {
     if ($produto["nome"] === "" || $produto["img"] === "" || $produto["preco"] <= 0) {
-        return "Preencha imagem, nome e preco valido.";
+        return "Preencha imagem, nome e preço válido.";
     }
 
     return null;
@@ -150,13 +150,13 @@ if (!usuarioEhAdmin()) {
 }
 
 if (!bancoDeDadosDisponivel($pdo)) {
-    responderJsonAdmin(["erro" => "Banco de dados indisponivel."], 503);
+    responderJsonAdmin(["erro" => "Banco de dados indisponível."], 503);
 }
 
 try {
     garantirTabelaProdutos($pdo);
 } catch (PDOException $exception) {
-    responderJsonAdmin(["erro" => "Nao foi possivel preparar a tabela de produtos."], 500);
+    responderJsonAdmin(["erro" => "Não foi possível preparar a tabela de produtos."], 500);
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
@@ -165,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         $produtos = array_map("formatarProdutoAdmin", $stmt->fetchAll());
         responderJsonAdmin(["produtos" => $produtos]);
     } catch (PDOException $exception) {
-        responderJsonAdmin(["erro" => "Nao foi possivel listar os produtos."], 500);
+        responderJsonAdmin(["erro" => "Não foi possível listar os produtos."], 500);
     }
 }
 
@@ -215,7 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             "produto" => formatarProdutoAdmin($produtoSalvo ?: []),
         ], 201);
     } catch (PDOException $exception) {
-        responderJsonAdmin(["erro" => "Nao foi possivel salvar o produto."], 500);
+        responderJsonAdmin(["erro" => "Não foi possível salvar o produto."], 500);
     }
 }
 
@@ -241,7 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT") {
         $produtoAtual = buscarProdutoAdminPorId($pdo, $produto["id"]);
 
         if ($produtoAtual === null) {
-            responderJsonAdmin(["erro" => "Produto nao encontrado."], 404);
+            responderJsonAdmin(["erro" => "Produto não encontrado."], 404);
         }
 
         $slugAtual = trim((string) ($produtoAtual["slug"] ?? ""));
@@ -290,7 +290,7 @@ if ($_SERVER["REQUEST_METHOD"] === "PUT") {
             "produto" => formatarProdutoAdmin($produtoAtualizado ?: []),
         ]);
     } catch (PDOException $exception) {
-        responderJsonAdmin(["erro" => "Nao foi possivel atualizar o produto."], 500);
+        responderJsonAdmin(["erro" => "Não foi possível atualizar o produto."], 500);
     }
 }
 
@@ -307,13 +307,13 @@ if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
         $stmt->execute(["id" => $id]);
 
         if ($stmt->rowCount() === 0) {
-            responderJsonAdmin(["erro" => "Produto nao encontrado."], 404);
+            responderJsonAdmin(["erro" => "Produto não encontrado."], 404);
         }
 
         responderJsonAdmin(["sucesso" => true]);
     } catch (PDOException $exception) {
-        responderJsonAdmin(["erro" => "Nao foi possivel remover o produto."], 500);
+        responderJsonAdmin(["erro" => "Não foi possível remover o produto."], 500);
     }
 }
 
-responderJsonAdmin(["erro" => "Metodo nao permitido."], 405);
+responderJsonAdmin(["erro" => "Método não permitido."], 405);

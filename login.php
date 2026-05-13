@@ -27,7 +27,7 @@ if (isset($_SESSION["usuario_id"])) {
 $erro = "";
 $emailPreenchido = "";
 $bancoDisponivel = bancoDeDadosDisponivel($pdo);
-$mensagemBancoIndisponivel = "O banco de dados esta indisponivel no momento. Tente novamente mais tarde.";
+$mensagemBancoIndisponivel = "O banco de dados esta indisponível no momento. Tente novamente mais tarde.";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $emailPreenchido = trim((string) ($_POST["email"] ?? ""));
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $erro = "Email ou senha invalidos.";
         } catch (PDOException $exception) {
-            $erro = "Nao foi possivel validar o login agora. Tente novamente em instantes.";
+            $erro = "Não foi possível validar o login agora. Tente novamente em instantes.";
         }
     }
 }
@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <p class="login-hero__eyebrow">Minha conta</p>
             <h1>Entre na sua conta para acompanhar seus pedidos e acessar sua area.</h1>
             <p class="login-hero__text">
-                Clientes entram normalmente por aqui e, se ainda nao tiverem acesso, podem criar uma conta em segundos. Contas administrativas continuam protegidas e so acessam o painel quando tiverem permissao.
+                Clientes entram normalmente por aqui e, se ainda não tiverem acesso, podem criar uma conta em segundos. Contas administrativas continuam protegidas e só acessam o painel quando tiverem permissão.
             </p>
 
             <div class="login-hero__actions">
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <button type="submit">Entrar na conta</button>
 
-                <a class="login-form__secondary" href="cadastro.php">Nao tenho conta ainda</a>
+                <a class="login-form__secondary" href="cadastro.php">Não tenho conta ainda</a>
 
                 <?php if ($erro !== "" || !$bancoDisponivel): ?>
                     <p id="login-mensagem" class="login-form__message" aria-live="polite">
@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <?php endif; ?>
 
                 <p class="login-form__hint">
-                    Ainda nao tem conta?
+                    Ainda não tem conta?
                     <a href="cadastro.php">Criar cadastro</a>
                 </p>
             </form>

@@ -44,10 +44,10 @@ function normalizarChocolate(chocolate, index = 0) {
         preco,
         imagem: imagemPrincipal,
         imagens: imagens.length > 0 ? imagens : [imagemPrincipal].filter(Boolean),
-        descricao: chocolate.descricao || "Um chocolate especial preparado para transformar qualquer momento em algo memoravel.",
+        descricao: chocolate.descricao || "Um chocolate especial preparado para transformar qualquer momento em algo memorável.",
         categoria: chocolate.categoria || "Chocolate",
         peso: chocolate.peso || "",
-        destaque: chocolate.destaque || "Selecao da casa",
+        destaque: chocolate.destaque || "Seleção da casa",
     };
 }
 
@@ -76,7 +76,7 @@ async function buscarCatalogoBase() {
 
         return await resposta.json();
     } catch (erro) {
-        console.warn("Nao foi possivel carregar o catalogo base.", erro);
+        console.warn("Não foi possível carregar o catálogo base.", erro);
         return [];
     }
 }
@@ -96,7 +96,7 @@ async function buscarChocolatesRemotos() {
 
         return await resposta.json();
     } catch (erro) {
-        console.warn("Fonte remota indisponivel, usando apenas o catalogo local.", erro);
+        console.warn("Fonte remota indisponível, usando apenas o catálogo local.", erro);
         return [];
     }
 }
@@ -105,7 +105,7 @@ function lerChocolatesLocais() {
     try {
         return JSON.parse(localStorage.getItem(STORAGE_KEY_CHOCOLATES)) || [];
     } catch (erro) {
-        console.warn("Nao foi possivel ler os chocolates salvos localmente.", erro);
+        console.warn("Não foi possível ler os chocolates salvos localmente.", erro);
         return [];
     }
 }
@@ -119,7 +119,7 @@ function lerBackupChocolatesRemovidos() {
         const backup = JSON.parse(localStorage.getItem(STORAGE_KEY_CHOCOLATES_BACKUP)) || [];
         return Array.isArray(backup) ? backup : [];
     } catch (erro) {
-        console.warn("Nao foi possivel ler o backup local dos chocolates removidos.", erro);
+        console.warn("Não foi possível ler o backup local dos chocolates removidos.", erro);
         return [];
     }
 }
@@ -140,7 +140,7 @@ function lerChavesChocolatesRemovidos() {
             .map((item) => String(item || "").trim())
             .filter(Boolean);
     } catch (erro) {
-        console.warn("Nao foi possivel ler os chocolates removidos localmente.", erro);
+        console.warn("Não foi possível ler os chocolates removidos localmente.", erro);
         return [];
     }
 }

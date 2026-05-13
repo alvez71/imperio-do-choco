@@ -16,7 +16,7 @@ $sucesso = "";
 $nomePreenchido = "";
 $emailPreenchido = "";
 $bancoDisponivel = bancoDeDadosDisponivel($pdo);
-$mensagemBancoIndisponivel = "O banco de dados esta indisponivel no momento. Tente novamente mais tarde.";
+$mensagemBancoIndisponivel = "O banco de dados esta indisponível no momento. Tente novamente mais tarde.";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nomePreenchido = trim((string) ($_POST["nome"] ?? ""));
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif (mb_strlen($senha) < 6) {
         $erro = "A senha precisa ter pelo menos 6 caracteres.";
     } elseif ($senha !== $confirmacaoSenha) {
-        $erro = "A confirmacao de senha nao confere.";
+        $erro = "A confirmação de senha nao confere.";
     } elseif (!$bancoDisponivel) {
         $erro = $mensagemBancoIndisponivel;
     } else {
@@ -53,12 +53,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     "papel" => "cliente",
                 ]);
 
-                $sucesso = "Conta criada com sucesso. Agora voce ja pode entrar.";
+                $sucesso = "Conta criada com sucesso. Agora você já pode entrar.";
                 $nomePreenchido = "";
                 $emailPreenchido = "";
             }
         } catch (PDOException $exception) {
-            $erro = "Nao foi possivel criar sua conta agora. Tente novamente em instantes.";
+            $erro = "Não foi possível criar sua conta agora. Tente novamente em instantes.";
         }
     }
 }
@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <?php endif; ?>
 
                 <p class="login-form__hint">
-                    Ja tem conta?
+                    Já tem conta?
                     <a href="login.php">Entrar agora</a>
                 </p>
             </form>

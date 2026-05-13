@@ -51,7 +51,7 @@ foreach ($tabelasPossiveis as $tabela) {
                 "categoria" => $registro["categoria"] ?? $registro["tipo"] ?? "Chocolate",
                 "peso" => $registro["peso"] ?? "",
                 "ref" => $registro["ref"] ?? $registro["referencia"] ?? "",
-                "destaque" => $registro["destaque"] ?? "Selecao da casa",
+                "destaque" => $registro["destaque"] ?? "Seleção da casa",
                 "descricao" => $registro["descricao"] ?? "",
                 "imagens" => $galeria,
             ];
