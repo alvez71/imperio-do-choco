@@ -8,7 +8,7 @@
     const OPTIONS = window.ADMIN_PANEL_OPTIONS || {};
     const REMOTE_API_URL = String(OPTIONS.remoteApiUrl || "admin_produtos.php").trim();
     const FALLBACK_IMAGE = "logo-velle-dulcis.png";
-    const DEFAULT_PRODUCT_DESCRIPTION = "Um chocolate especial preparado para transformar qualquer momento em algo memoravel.";
+    const DEFAULT_PRODUCT_DESCRIPTION = "Um chocolate especial preparado para transformar qualquer momento em algo memorável.";
     const currencyFormatter = new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL",
@@ -212,9 +212,9 @@
         removeRemovedBackupEntry(productKey);
     }
 
-    async function requestRemoteProducts(method = "GET", payload = null, fallbackMessage = "Nao foi possivel processar a solicitacao.") {
+    async function requestRemoteProducts(method = "GET", payload = null, fallbackMessage = "Não foi possível processar a solicitação.") {
         if (!REMOTE_API_URL) {
-            throw new Error("API administrativa indisponivel.");
+            throw new Error("API administrativa indisponível.");
         }
 
         const requestOptions = {
@@ -252,10 +252,10 @@
         }
 
         try {
-            const data = await requestRemoteProducts("GET", null, "Nao foi possivel carregar os produtos salvos no banco.");
+            const data = await requestRemoteProducts("GET", null, "Não foi possível carregar os produtos salvos no banco.");
             return Array.isArray(data.produtos) ? data.produtos : [];
         } catch (error) {
-            console.warn("Nao foi possivel carregar os produtos remotos.", error);
+            console.warn("Não foi possível carregar os produtos remotos.", error);
             return [];
         }
     }
@@ -273,7 +273,7 @@
             categoria: values.category || existingProduct?.categoria || "Chocolate",
             peso: values.weight || existingProduct?.peso || "",
             ref: values.ref || existingProduct?.ref || "",
-            destaque: values.highlight || existingProduct?.destaque || "Selecao da casa",
+            destaque: values.highlight || existingProduct?.destaque || "Seleção da casa",
             descricao: values.description || existingProduct?.descricao || DEFAULT_PRODUCT_DESCRIPTION,
             imagens: gallery,
             tipo: values.category || existingProduct?.categoria || "Chocolate",
@@ -290,7 +290,7 @@
             categoria: normalized.categoria || "Chocolate",
             peso: normalized.peso || "",
             ref: normalized.ref || "",
-            destaque: normalized.destaque || "Selecao da casa",
+            destaque: normalized.destaque || "Seleção da casa",
             descricao: normalized.descricao || DEFAULT_PRODUCT_DESCRIPTION,
             imagens: Array.isArray(normalized.imagens) && normalized.imagens.length > 0
                 ? normalized.imagens
@@ -333,7 +333,7 @@
             preco: values.price,
             categoria: values.category || base.categoria || "Chocolate",
             peso: values.weight || base.peso || "",
-            destaque: values.highlight || base.destaque || "Selecao da casa",
+            destaque: values.highlight || base.destaque || "Seleção da casa",
             descricao: values.description || base.descricao || DEFAULT_PRODUCT_DESCRIPTION,
             img: image,
             imagem: image,
@@ -402,7 +402,7 @@
             ? "item salvo no banco"
             : editingProduct?._isLocal
                 ? "item salvo localmente"
-                : "item do catalogo";
+                : "item do catálogo";
 
         if (elements.modeResume) {
             elements.modeResume.textContent = isEditing ? `Editando ${editingProduct.nome}` : "Novo produto";
@@ -415,11 +415,11 @@
         if (elements.modeText) {
             elements.modeText.textContent = isEditing
                 ? `Ajuste os dados e salve para atualizar este ${targetLabel}.`
-                : "Preencha os campos para criar um produto novo. Novos cadastros sao enviados ao banco e refletidos na vitrine.";
+                : "Preencha os campos para criar um produto novo. Novos cadastros são enviados ao banco e refletidos na vitrine.";
         }
 
         if (elements.publish) {
-            elements.publish.textContent = isEditing ? "Salvar alteracoes" : "Publicar produto";
+            elements.publish.textContent = isEditing ? "Salvar alterações" : "Publicar produto";
         }
 
         if (elements.cancelEdit) {
@@ -432,12 +432,12 @@
         const values = getFormValues();
         const previewName = values.name || "Chocolate sem nome";
         const previewCategory = values.category || existingProduct?.categoria || "Categoria";
-        const previewWeight = values.weight || existingProduct?.peso || "Peso nao informado";
-        const previewHighlight = values.highlight || existingProduct?.destaque || "Selecao da casa";
-        const previewDescription = values.description || existingProduct?.descricao || "Adicione imagem, destaque e descricao para acompanhar o produto antes de publicar.";
+        const previewWeight = values.weight || existingProduct?.peso || "Peso não informado";
+        const previewHighlight = values.highlight || existingProduct?.destaque || "Seleção da casa";
+        const previewDescription = values.description || existingProduct?.descricao || "Adicione imagem, destaque e descrição para acompanhar o produto antes de publicar.";
         const previewImage = values.image || existingProduct?.imagem || FALLBACK_IMAGE;
-        const previewSlug = existingProduct?.slug || slugifyProductName(previewName) || "sera-gerado-automaticamente";
-        const previewRef = values.ref || existingProduct?.ref || "sera-gerada-automaticamente";
+        const previewSlug = existingProduct?.slug || slugifyProductName(previewName) || "será gerado automaticamente";
+        const previewRef = values.ref || existingProduct?.ref || "será gerada automaticamente";
         const galleryImages = getGalleryImages(previewImage, values.gallery);
 
         elements.preview.image.src = previewImage;
@@ -556,11 +556,11 @@
     function renderProductCard(product) {
         const meta = [
             product.categoria || "Chocolate",
-            product.peso || "Peso nao informado",
-            product.ref || "Sem referencia",
+            product.peso || "Peso não informado",
+            product.ref || "Sem referência",
         ].join(" | ");
 
-        const sourceLabel = product._isLocal ? "Local" : product._isRemote ? "Banco" : "Catalogo";
+        const sourceLabel = product._isLocal ? "Local" : product._isRemote ? "Banco" : "Catálogo";
         const sourceClass = product._isLocal ? "admin-chip--local" : "admin-chip--catalogo";
         const detailLabel = product.destaque || "Sem destaque";
 
@@ -596,14 +596,14 @@
     function renderRemovedCard(product) {
         const meta = [
             product.categoria || "Chocolate",
-            product.peso || "Peso nao informado",
-            product.ref || "Sem referencia",
+            product.peso || "Peso não informado",
+            product.ref || "Sem referência",
         ].join(" | ");
         const originLabel = product._origin === "remoto"
             ? "Banco"
             : product._origin === "local"
                 ? "Local"
-                : "Catalogo";
+                : "Catálogo";
 
         return `
             <article class="admin-product-item admin-product-item--removed">
@@ -750,7 +750,7 @@
                 await requestRemoteProducts(
                     "DELETE",
                     { id: Number(product.id) },
-                    "Nao foi possivel remover o produto salvo no banco."
+                    "Não foi possível remover o produto salvo no banco."
                 );
                 markProductAsRemoved(product, "remoto");
             } else {
@@ -762,8 +762,8 @@
                 }
             }
         } catch (error) {
-            console.error("Nao foi possivel remover o produto.", error);
-            showStatus(error.message || "Nao foi possivel remover o produto.", "error");
+            console.error("Não foi possível remover o produto.", error);
+            showStatus(error.message || "Não foi possível remover o produto.", "error");
             return;
         }
 
@@ -771,7 +771,7 @@
             resetForm({ keepStatus: true });
         }
 
-        showStatus("Produto removido da vitrine. Voce pode restaurar na lista de backup.", "success");
+        showStatus("Produto removido da vitrine. Você pode restaurar na lista de backup.", "success");
         state.removedOpen = true;
         await loadData();
     }
@@ -788,7 +788,7 @@
                 await requestRemoteProducts(
                     "POST",
                     buildRemotePayloadFromProduct(product),
-                    "Nao foi possivel restaurar o produto no banco."
+                    "Não foi possível restaurar o produto no banco."
                 );
             } else if (product._origin === "local") {
                 restoreLocalProduct(product);
@@ -796,8 +796,8 @@
 
             clearRemovedProduct(productKey);
         } catch (error) {
-            console.error("Nao foi possivel restaurar o produto.", error);
-            showStatus(error.message || "Nao foi possivel restaurar o produto.", "error");
+            console.error("Não foi possível restaurar o produto.", error);
+            showStatus(error.message || "Não foi possível restaurar o produto.", "error");
             return;
         }
 
@@ -922,8 +922,8 @@
                     method,
                     payload,
                     isEditingRemoteProduct
-                        ? "Nao foi possivel atualizar o produto salvo no banco."
-                        : "Nao foi possivel publicar o produto no banco."
+                        ? "Não foi possível atualizar o produto salvo no banco."
+                        : "Não foi possível publicar o produto no banco."
                 );
             } else {
                 const product = buildProductFromForm(existingProduct);
@@ -933,18 +933,18 @@
             resetForm({ keepStatus: true });
             showStatus(
                 !existingProduct
-                    ? "Produto publicado com sucesso. A vitrine ja pode usar esse cadastro do banco."
+                    ? "Produto publicado com sucesso. A vitrine já pode usar esse cadastro do banco."
                     : isEditingRemoteProduct
                         ? "Produto atualizado no banco com sucesso."
                         : existingProduct._isLocal
                             ? "Produto local atualizado com sucesso."
-                            : "Produto do catalogo personalizado localmente com sucesso.",
+                            : "Produto do catálogo personalizado localmente com sucesso.",
                 "success"
             );
             await loadData();
         } catch (error) {
-            console.error("Nao foi possivel salvar o produto.", error);
-            showStatus(error.message || "Nao foi possivel salvar o produto. Tente novamente.", "error");
+            console.error("Não foi possível salvar o produto.", error);
+            showStatus(error.message || "Não foi possível salvar o produto. Tente novamente.", "error");
         }
     });
 
@@ -966,7 +966,7 @@
     updatePreview();
 
     loadData().catch((error) => {
-        console.error("Nao foi possivel carregar o painel admin.", error);
-        showStatus("Nao foi possivel carregar o catalogo neste momento.", "error");
+        console.error("Não foi possível carregar o painel admin.", error);
+        showStatus("Não foi possível carregar o catálogo neste momento.", "error");
     });
 })();

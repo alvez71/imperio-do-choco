@@ -8,8 +8,8 @@
     "categoria": "Chocolate recheado",
     "peso": "100g",
     "ref": "VD-1001",
-    "destaque": "Selecao da casa",
-    "descricao": "Chocolate com recheio cremoso e toque de morango para uma experiencia doce e marcante.",
+    "destaque": "Seleção da casa",
+    "descricao": "Chocolate com recheio cremoso e toque de morango para uma experiência doce e marcante.",
     "imagens": [
       "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_alpinellawithstrawberry100gr.jpeg?v=1761647260"
     ]
@@ -24,7 +24,7 @@
     "peso": "100g",
     "ref": "VD-1002",
     "destaque": "Favorito da vitrine",
-    "descricao": "Uma opcao delicada e cremosa, ideal para presentear ou montar combinacoes especiais.",
+    "descricao": "Uma opção delicada e cremosa, ideal para presentear ou montar combinações especiais.",
     "imagens": [
       "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_560cde9e09eea7d7770f1c1d5db26d91.jpeg?v=1768478586"
     ]
@@ -39,7 +39,7 @@
     "peso": "Edicao especial",
     "ref": "VD-1003",
     "destaque": "Edicao premium",
-    "descricao": "Selecao especial com visual marcante e proposta premium para momentos de destaque.",
+    "descricao": "Seleção especial com visual marcante e proposta premium para momentos de destaque.",
     "imagens": [
       "https://www.rickdoces.com.br/estatico/rickdoces/images/produto/f93490b5f7cab0f200bc76fb4cddde1f.png?v=1774458174"
     ]
@@ -48,13 +48,13 @@
     "id": "catalogo-paizao",
     "slug": "paizao",
     "img": "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_arnottstimtamoriginal163gr.jpeg?v=1761131171",
-    "nome": "Paizao",
+    "nome": "Paizão",
     "preco": 43.99,
     "categoria": "Presente especial",
     "peso": "163g",
     "ref": "VD-1004",
     "destaque": "Presente perfeito",
-    "descricao": "Produto pensado para presentear, com sabor intenso e excelente presenca na vitrine.",
+    "descricao": "Produto pensado para presentear, com sabor intenso e excelente presença na vitrine.",
     "imagens": [
       "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_arnottstimtamoriginal163gr.jpeg?v=1761131171"
     ]
@@ -84,7 +84,7 @@
     "peso": "100g",
     "ref": "VD-1006",
     "destaque": "Caramelo cremoso",
-    "descricao": "Tablete com recheio suave de caramelo, excelente para quem busca um chocolate classico e cremoso.",
+    "descricao": "Tablete com recheio suave de caramelo, excelente para quem busca um chocolate clássico e cremoso.",
     "imagens": [
       "https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_milkacaramelcreme100gr.jpeg?v=1666638362"
     ]

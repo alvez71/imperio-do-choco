@@ -88,7 +88,7 @@ function criarEstadoVazio() {
 
     produtoContainer.innerHTML = `
         <section class="produto-estado">
-            <p>Produto nao encontrado.</p>
+            <p>Produto não encontrado.</p>
             <a href="${rotaHome}">Voltar para a vitrine</a>
         </section>
     `;
@@ -102,15 +102,15 @@ function obterResumoCuradoria(produto) {
     }
 
     if (categoria.includes("artesanal")) {
-        return `${produto.nome} entra na vitrine como uma escolha artesanal de acabamento delicado, pensada para quem valoriza sabor e presenca no mesmo gesto.`;
+        return `${produto.nome} entra na vitrine como uma escolha artesanal de acabamento delicado, pensada para quem valoriza sabor e presença no mesmo gesto.`;
     }
 
     if (categoria.includes("presente")) {
-        return `${produto.nome} foi selecionado para momentos de presente, com composicao visual forte e um perfil que funciona muito bem em ocasioes especiais.`;
+        return `${produto.nome} foi selecionado para momentos de presente, com composição visual forte e um perfil que funciona muito bem em ocasiões especiais.`;
     }
 
     if (categoria.includes("premium") || categoria.includes("caixa")) {
-        return `${produto.nome} apresenta uma proposta mais sofisticada, com foco em impacto visual, curadoria refinada e presenca de vitrine.`;
+        return `${produto.nome} apresenta uma proposta mais sofisticada, com foco em impacto visual, curadoria refinada e presença de vitrine.`;
     }
 
     if (categoria.includes("import")) {
@@ -128,7 +128,7 @@ function obterMomentoIdeal(produto) {
     }
 
     if (categoria.includes("presente")) {
-        return "Funciona muito bem para presentear, montar kits especiais ou criar uma experiencia mais memoravel em ocasioes afetivas.";
+        return "Funciona muito bem para presentear, montar kits especiais ou criar uma experiência mais memorável em ocasiões afetivas.";
     }
 
     if (categoria.includes("premium") || categoria.includes("caixa")) {
@@ -139,7 +139,7 @@ function obterMomentoIdeal(produto) {
         return "Uma boa escolha para quem quer variar a selecao da casa com um item diferente, mais curioso e com perfil fora do comum.";
     }
 
-    return "Perfeito para transformar uma pausa simples em um momento mais especial, seja para consumo proprio, para dividir ou para compor uma selecao presenteavel.";
+    return "Perfeito para transformar uma pausa simples em um momento mais especial, seja para consumo próprio, para dividir ou para compor uma seleção presenteável.";
 }
 
 function obterDetalhesProduto(produto) {
@@ -156,7 +156,7 @@ function obterDetalhesProduto(produto) {
         },
         {
             rotulo: "Destaque",
-            valor: produto.destaque || "Selecao da casa",
+            valor: produto.destaque || "Seleção da casa",
             apoio: "Selo curatorial usado para orientar a escolha visual e sensorial.",
         },
     ];
@@ -197,9 +197,9 @@ async function carregarSessaoProduto() {
 function renderizarProduto(produto, relacionados) {
     const rotaHome = obterRotaHome();
     const categoria = produto.categoria || "Chocolate";
-    const destaque = produto.destaque || "Selecao da casa";
-    const referencia = produto.ref || "Sem referencia";
-    const descricao = produto.descricao || "Um chocolate especial preparado para transformar qualquer momento em algo memoravel.";
+    const destaque = produto.destaque || "Seleção da casa";
+    const referencia = produto.ref || "Sem referência";
+    const descricao = produto.descricao || "Um chocolate especial preparado para transformar qualquer momento em algo memorável.";
     const imagens = Array.isArray(produto.imagens) ? produto.imagens.filter(Boolean) : [];
     const galeria = imagens.length > 0 ? imagens : [produto.imagem].filter(Boolean);
     const rotaVitrine = `${rotaHome}#vitrine`;
@@ -267,7 +267,7 @@ function renderizarProduto(produto, relacionados) {
                     </div>
 
                     <div class="produto-essencia">
-                        <p class="produto-essencia__eyebrow">Selecao editorial</p>
+                        <p class="produto-essencia__eyebrow">Seleção editorial</p>
                         <h2>Por que este chocolate se destaca</h2>
                         <p>${escapeHtml(resumoCuradoria)}</p>
                     </div>
@@ -275,7 +275,7 @@ function renderizarProduto(produto, relacionados) {
 
                 <div class="produto-info">
                     <div class="produto-breadcrumb">
-                        <a href="${escapeHtml(rotaHome)}">Inicio</a>
+                        <a href="${escapeHtml(rotaHome)}">Início</a>
                         <span>&rsaquo;</span>
                         <span>${escapeHtml(categoria)}</span>
                         <span>&rsaquo;</span>
@@ -313,7 +313,7 @@ function renderizarProduto(produto, relacionados) {
 
             <section class="produto-story">
                 <article class="produto-story__bloco">
-                    <p class="produto-story__eyebrow">Experiencia</p>
+                    <p class="produto-story__eyebrow">Experiência</p>
                     <h2>Uma escolha pensada para momentos especiais</h2>
                     <p>${escapeHtml(momentoIdeal)}</p>
                 </article>
