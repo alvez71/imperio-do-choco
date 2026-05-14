@@ -1,6 +1,16 @@
 const STORAGE_KEY_AUTH = "imperio_auth_session";
 const STORAGE_KEY_USERS = "imperio_auth_users";
+
+const AUTH_DEFAULT_USER = {
+    nome: "Administrador",
+    email: "admin@imperiodochocolate.com",
+    senha: "admin123",
+    papel: "admin",
 };
+
+function normalizarEmail(email) {
+    return String(email || "").trim().toLowerCase();
+}
 
 function obterRotasApp() {
     const usandoPhp = /\.php($|\?)/i.test(window.location.pathname);
@@ -11,11 +21,85 @@ function obterRotasApp() {
         login: usandoPhp ? "login.php" : "login.html",
         cadastro: usandoPhp ? "cadastro.php" : "cadastro.html",
         conta: usandoPhp ? "conta.php" : "conta.html",
+    };
+}
+
+function obterDestinoPosLogin(papel = "cliente") {
+    const rotas = obterRotasApp();
+    return papel === "admin" ? rotas.admin : rotas.conta;
+}
+
+function obterUsuariosLocais() {
+    let usuarios = [];
+
+    try {
+        const salvos = JSON.parse(localStorage.getItem(STORAGE_KEY_USERS)) || [];
+        usuarios = Array.isArray(salvos) ? salvos : [];
+    } catch (erro) {
+        console.warn("Nao foi possivel ler os usuarios locais.", erro);
+    }
+
+    const possuiAdmin = usuarios.some((usuario) => normalizarEmail(usuario.email) === AUTH_DEFAULT_USER.email);
+    return possuiAdmin ? usuarios : [AUTH_DEFAULT_USER, ...usuarios];
+}
+
+function salvarUsuariosLocais(usuarios) {
+    const usuariosSemAdminPadrao = usuarios.filter((usuario) =>
+        normalizarEmail(usuario.email) !== AUTH_DEFAULT_USER.email
+    );
+    localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(usuariosSemAdminPadrao));
+}
+
+function buscarUsuarioPorEmail(email) {
+    const emailNormalizado = normalizarEmail(email);
+    return obterUsuariosLocais().find((usuario) => normalizarEmail(usuario.email) === emailNormalizado) || null;
+}
+
+function obterSessaoAutenticada() {
+    if (window.APP_AUTH && window.APP_AUTH.autenticado) {
+        return {
+            nome: window.APP_AUTH.nome || "Cliente",
+            email: window.APP_AUTH.email || "",
+            papel: window.APP_AUTH.papel || "cliente",
+        };
+    }
+
+    try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY_AUTH)) || null;
+    } catch (erro) {
+        console.warn("Nao foi possivel ler a sessao atual.", erro);
+        return null;
+    }
+}
+
+function usuarioEstaAutenticado() {
+    if (window.APP_AUTH) {
+        return Boolean(window.APP_AUTH.autenticado);
+    }
+
+    const sessao = obterSessaoAutenticada();
+    return Boolean(sessao && sessao.email);
+}
+
 function salvarSessaoAutenticada(usuario) {
     localStorage.setItem(STORAGE_KEY_AUTH, JSON.stringify({
         nome: usuario.nome,
-        email: usuario.email,
+        email: normalizarEmail(usuario.email),
         papel: usuario.papel || "cliente",
+        loginEm: new Date().toISOString(),
+    }));
+}
+
+function encerrarSessaoAutenticada() {
+    localStorage.removeItem(STORAGE_KEY_AUTH);
+}
+
+function autenticarUsuario(email, senha) {
+    const usuario = buscarUsuarioPorEmail(email);
+    const senhaNormalizada = String(senha || "").trim();
+
+    if (usuario && String(usuario.senha || "") === senhaNormalizada) {
+        salvarSessaoAutenticada(usuario);
         return {
             sucesso: true,
             usuario: obterSessaoAutenticada(),
@@ -113,8 +197,8 @@ function aplicarLinkDaConta() {
         return;
     }
 
-    const autenticado = usuarioEstaAutenticado();
     const sessao = obterSessaoAutenticada();
+    const autenticado = Boolean(sessao && sessao.email);
     const destinoConta = autenticado ? obterDestinoPosLogin(sessao?.papel) : rotas.login;
     const rotuloTitleAutenticado = sessao?.papel === "admin" ? "Painel administrativo" : "Minha conta";
 

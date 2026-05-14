@@ -85,8 +85,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && $bancoDisponivel) {
     $referencia = trim((string) ($_POST["referencia"] ?? ""));
     $principal = isset($_POST["principal"]) ? 1 : 0;
 
-    if ($destinatarioNome === "" || $cep === "" || $logradouro === "" || $numero === "" || $bairro === "" || $cidade === "" || strlen($estado) !== 2) {
-        $erro = "Preencha nome, CEP, logradouro, numero, bairro, cidade e UF.";
+    if ($destinatarioNome === "" || $telefone === "" || $cep === "" || $logradouro === "" || $numero === "" || $bairro === "" || $cidade === "" || strlen($estado) !== 2) {
+        $erro = "Preencha nome, telefone, CEP, logradouro, numero, bairro, cidade e UF.";
     } else {
         try {
             $pdo->beginTransaction();
@@ -160,7 +160,7 @@ $mostrarFormularioEndereco = $_SERVER["REQUEST_METHOD"] === "POST";
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="admin.css?v=20260417-5">
 </head>
-<body class="admin-page admin-page--account">
+<body class="account-page admin-page admin-page--account">
     <div class="admin-shell">
         <div class="admin-topbar">
             <a class="admin-topbar__voltar" href="index.php">Voltar para a vitrine</a>
@@ -241,8 +241,8 @@ $mostrarFormularioEndereco = $_SERVER["REQUEST_METHOD"] === "POST";
                             </label>
 
                             <label class="admin-field">
-                                <span class="admin-field__label">Telefone</span>
-                                <input type="text" name="telefone" placeholder="Telefone para contato">
+                                <span class="admin-field__label">Telefone para finalizar compra</span>
+                                <input type="tel" name="telefone" placeholder="(11) 90000-0000" required>
                             </label>
 
                             <label class="admin-field">
@@ -327,6 +327,7 @@ $mostrarFormularioEndereco = $_SERVER["REQUEST_METHOD"] === "POST";
                         <?php if (!empty($endereco["referencia"])): ?>
                             <p class="admin-product-item__meta">Referencia: <?php echo htmlspecialchars((string) $endereco["referencia"], ENT_QUOTES, "UTF-8"); ?></p>
                         <?php endif; ?>
+                        <p class="admin-product-item__meta">Telefone: <?php echo htmlspecialchars((string) ($endereco["telefone"] ?: "Nao cadastrado"), ENT_QUOTES, "UTF-8"); ?></p>
                     </article>
                 <?php endforeach; ?>
                 </div>
@@ -336,8 +337,8 @@ $mostrarFormularioEndereco = $_SERVER["REQUEST_METHOD"] === "POST";
         <section class="admin-card account-section">
             <div class="admin-card__header admin-card__header--account-inline">
                 <div>
-                    <p class="admin-card__eyebrow">Orders</p>
-                    <h2>Pedidos realizados</h2>
+                    <p class="admin-card__eyebrow">Historico</p>
+                    <h2>Historico de vendas</h2>
                 </div>
             </div>
             <?php if ($pedidos === []): ?>

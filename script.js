@@ -23,6 +23,7 @@ const painelPesquisa = document.getElementById("painel-pesquisa");
 const listaSugestoes = document.getElementById("lista-sugestoes");
 const listaResultadosPesquisa = document.getElementById("lista-resultados-pesquisa");
 const listaAtalhosPesquisa = document.getElementById("lista-atalhos-pesquisa");
+const filtrosCategoria = document.getElementById("filtros-categoria");
 const popupCarrinho = document.getElementById("popup-carrinho");
 const popupCarrinhoProduto = document.getElementById("popup-carrinho-produto");
 const popupCarrinhoBarra = document.getElementById("popup-carrinho-barra");
@@ -31,6 +32,8 @@ const popupRemocaoTexto = document.getElementById("popup-remocao-texto");
 const fecharPopupRemocao = document.getElementById("fechar-popup-remocao");
 const popupBoasVindas = document.getElementById("popup-boas-vindas");
 const fecharPopupBoasVindas = document.getElementById("fechar-popup-boas-vindas");
+const popupAvisoConta = document.getElementById("popup-aviso-conta");
+const fecharPopupAvisoConta = document.getElementById("fechar-popup-aviso-conta");
 const btnTema = document.getElementById("btn-tema");
 const btnFinalizarPedido = document.getElementById("finalizar");
 const headerSite = document.querySelector(".topo-site");
@@ -139,11 +142,13 @@ function abrirMenuMobile() {
         return;
     }
 
+    fecharPopupAvisoContaComEstado();
     clearTimeout(timeoutFechamentoMenuMobile);
     menuMobile.classList.remove("menu-mobile--fechando");
     menuMobile.classList.add("ativo");
     menuMobile.setAttribute("aria-hidden", "false");
     menuMobileToggle.setAttribute("aria-expanded", "true");
+    document.body.classList.add("menu-mobile-aberto");
     document.body.classList.add("sem-rolagem");
 }
 
@@ -164,6 +169,7 @@ function fecharMenuMobile() {
     timeoutFechamentoMenuMobile = window.setTimeout(() => {
         menuMobile.classList.remove("menu-mobile--fechando");
         menuMobile.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("menu-mobile-aberto");
 
         if (overlayPesquisa.classList.contains("oculto") && !carrinhoLateral.classList.contains("ativo")) {
             document.body.classList.remove("sem-rolagem");
@@ -262,17 +268,58 @@ let carrinho = [];
 let listaChocolates = [];
 let popupCarrinhoTimeout;
 let popupCarrinhoInicio = 0;
+let popupCarrinhoTempoRestante = 0;
+let popupCarrinhoUltimoProduto = "";
 let popupRemocaoTimeout;
 let popupBoasVindasTimeout;
+let popupAvisoContaTimeout;
 let sincronizandoCarrinho = false;
 let timeoutFechamentoPesquisa;
 let carregamentoCarrinhoPromise = Promise.resolve();
 let ordenacaoVitrine = obterOrdenacaoInicial();
+let categoriaAtiva = "";
 let vitrineArrastando = false;
 let vitrineArrasteInicioX = 0;
 let vitrineScrollInicio = 0;
 
 const DURACAO_POPUP_CARRINHO = 4000;
+
+function obterRotasApp() {
+    const usaPhp = rotaHomeAtual === "index.php";
+
+    return {
+        home: usaPhp ? "index.php" : "index.html",
+        login: usaPhp ? "login.php" : "login.html",
+        conta: usaPhp ? "conta.php" : "conta.html",
+    };
+}
+
+function aplicarLinkDaConta() {
+    const rotas = obterRotasApp();
+    const destinoConta = window.APP_AUTH?.destinoConta || rotas.login;
+    const usuarioAutenticado = Boolean(window.APP_AUTH?.autenticado);
+    const nomeUsuario = String(window.APP_AUTH?.nome || "").trim();
+
+    document.querySelectorAll("#link-conta, #link-conta-mobile").forEach((link) => {
+        link.href = destinoConta;
+        link.dataset.logado = usuarioAutenticado ? "true" : "false";
+    });
+
+    document.querySelectorAll("[data-hide-when-authenticated]").forEach((elemento) => {
+        elemento.hidden = usuarioAutenticado;
+    });
+
+    const textoContaMobile = document.getElementById("link-conta-mobile-texto");
+    const textoConta = document.getElementById("link-conta-texto");
+
+    if (textoContaMobile) {
+        textoContaMobile.textContent = usuarioAutenticado ? (nomeUsuario || "Minha conta") : "Entrar";
+    }
+
+    if (textoConta && !usuarioAutenticado) {
+        textoConta.textContent = "Minha conta";
+    }
+}
 
 function esconderPopupCarrinho() {
     popupCarrinho.classList.remove("ativo");
@@ -282,6 +329,8 @@ function esconderPopupCarrinho() {
 function encerrarPopupCarrinho() {
     clearTimeout(popupCarrinhoTimeout);
     popupCarrinhoInicio = 0;
+    popupCarrinhoTempoRestante = 0;
+    popupCarrinhoUltimoProduto = "";
     esconderPopupCarrinho();
 }
 
@@ -325,11 +374,18 @@ function reposicionarPopupCarrinhoAtivo() {
 }
 
 function mostrarPopupCarrinho(nomeProduto, duracao = DURACAO_POPUP_CARRINHO, proporcaoInicial = 1) {
+    clearTimeout(popupCarrinhoTimeout);
+    popupCarrinhoUltimoProduto = nomeProduto;
+    popupCarrinhoTempoRestante = duracao;
+
     if (carrinhoLateral.classList.contains("ativo")) {
+        popupCarrinhoInicio = 0;
+        popupCarrinhoBarra.style.transition = "none";
+        popupCarrinhoBarra.style.transform = `scaleX(${proporcaoInicial})`;
+        esconderPopupCarrinho();
         return;
     }
 
-    clearTimeout(popupCarrinhoTimeout);
     popupCarrinhoInicio = Date.now();
 
     popupCarrinhoProduto.textContent = nomeProduto;
@@ -346,7 +402,33 @@ function pausarPopupCarrinho() {
         return;
     }
 
-    encerrarPopupCarrinho();
+    const tempoDecorrido = Date.now() - popupCarrinhoInicio;
+    popupCarrinhoTempoRestante = Math.max(0, popupCarrinhoTempoRestante - tempoDecorrido);
+
+    clearTimeout(popupCarrinhoTimeout);
+
+    if (popupCarrinhoTempoRestante <= 0) {
+        encerrarPopupCarrinho();
+        return;
+    }
+
+    const proporcaoRestante = popupCarrinhoTempoRestante / DURACAO_POPUP_CARRINHO;
+    popupCarrinhoBarra.style.transition = "none";
+    popupCarrinhoBarra.style.transform = `scaleX(${proporcaoRestante})`;
+    popupCarrinhoInicio = 0;
+    esconderPopupCarrinho();
+}
+
+function retomarPopupCarrinho() {
+    if (!popupCarrinhoUltimoProduto || popupCarrinhoTempoRestante <= 0 || carrinhoLateral.classList.contains("ativo")) {
+        return;
+    }
+
+    mostrarPopupCarrinho(
+        popupCarrinhoUltimoProduto,
+        popupCarrinhoTempoRestante,
+        popupCarrinhoTempoRestante / DURACAO_POPUP_CARRINHO
+    );
 }
 
 function mostrarPopupRemocao(nomeProduto) {
@@ -385,6 +467,33 @@ function exibirPopupBoasVindas() {
     popupBoasVindasTimeout = setTimeout(fecharPopupBoasVindasComEstado, 4200);
 }
 
+function fecharPopupAvisoContaComEstado() {
+    if (!popupAvisoConta) {
+        return;
+    }
+
+    clearTimeout(popupAvisoContaTimeout);
+    popupAvisoConta.classList.remove("ativo");
+    popupAvisoConta.setAttribute("aria-hidden", "true");
+}
+
+function exibirPopupAvisoConta() {
+    if (!popupAvisoConta || usuarioTemContaLogada() || menuMobileAberto()) {
+        return;
+    }
+
+    clearTimeout(popupAvisoContaTimeout);
+    popupAvisoContaTimeout = window.setTimeout(() => {
+        if (usuarioTemContaLogada() || menuMobileAberto()) {
+            fecharPopupAvisoContaComEstado();
+            return;
+        }
+
+        popupAvisoConta.classList.add("ativo");
+        popupAvisoConta.setAttribute("aria-hidden", "false");
+    }, 700);
+}
+
 function obterQuantidadeNoCarrinho(nomeProduto) {
     const item = carrinho.find((produto) => produto.nome === nomeProduto);
     return item ? item.qtd : 0;
@@ -392,6 +501,14 @@ function obterQuantidadeNoCarrinho(nomeProduto) {
 
 function usuarioTemCarrinhoPersistente() {
     return Boolean(window.APP_AUTH && window.APP_AUTH.autenticado);
+}
+
+function usuarioTemContaLogada() {
+    if (typeof usuarioEstaAutenticado === "function") {
+        return usuarioEstaAutenticado();
+    }
+
+    return usuarioTemCarrinhoPersistente();
 }
 
 function obterDadosProduto(nomeProduto, imagemProduto = "") {
@@ -454,6 +571,78 @@ async function persistirCarrinhoNoServidor() {
     }
 }
 
+function salvarCarrinhoLocal() {
+    if (usuarioTemCarrinhoPersistente()) {
+        return;
+    }
+
+    try {
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    } catch (erro) {
+        console.warn("Nao foi possivel salvar o carrinho local.", erro);
+    }
+}
+
+function carregarCarrinhoLocal() {
+    try {
+        const carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho")) || [];
+        carrinho = Array.isArray(carrinhoSalvo)
+            ? carrinhoSalvo.map((item) => normalizarItemCarrinho(item)).filter((item) => item.nome && item.chave)
+            : [];
+    } catch (erro) {
+        console.warn("Nao foi possivel ler o carrinho local.", erro);
+        carrinho = [];
+    }
+}
+
+async function carregarCarrinhoDaConta() {
+    if (!usuarioTemCarrinhoPersistente()) {
+        carregarCarrinhoLocal();
+        atualizarCarrinho(false);
+        return;
+    }
+
+    sincronizandoCarrinho = true;
+
+    try {
+        const resposta = await fetch(CART_SYNC_URL, {
+            credentials: "same-origin",
+            headers: {
+                "Accept": "application/json",
+            },
+        });
+
+        if (!resposta.ok) {
+            return;
+        }
+
+        const dados = await resposta.json();
+        carrinho = Array.isArray(dados.itens)
+            ? dados.itens.map((item) => normalizarItemCarrinho(item)).filter((item) => item.nome && item.chave)
+            : [];
+        atualizarCarrinho(false);
+    } catch (erro) {
+        console.warn("Nao foi possivel carregar o carrinho salvo da conta.", erro);
+    } finally {
+        sincronizandoCarrinho = false;
+    }
+}
+
+function persistirCarrinhoDeSaida() {
+    if (!usuarioTemCarrinhoPersistente()) {
+        salvarCarrinhoLocal();
+        return;
+    }
+
+    const payload = JSON.stringify({
+        itens: obterPayloadCarrinho(),
+    });
+
+    if (navigator.sendBeacon) {
+        navigator.sendBeacon(CART_SYNC_URL, new Blob([payload], { type: "application/json" }));
+    }
+}
+
 async function finalizarPedido() {
     if (!usuarioTemCarrinhoPersistente()) {
         window.location.href = obterRotasApp().login;
@@ -490,6 +679,11 @@ async function finalizarPedido() {
                 return;
             }
 
+            if (dados?.codigo === "telefone_principal_ausente") {
+                window.location.href = obterRotasApp().conta;
+                return;
+            }
+
             mostrarPopupAcao(String(dados?.erro || "Nao foi possivel finalizar o pedido."));
             return;
         }
@@ -510,6 +704,165 @@ async function finalizarPedido() {
     }
 }
 
+function obterOrdenacaoInicial() {
+    try {
+        const ordenacaoSalva = localStorage.getItem(VITRINE_SORT_STORAGE_KEY);
+
+        if (VITRINE_SORT_OPTIONS.has(ordenacaoSalva)) {
+            return ordenacaoSalva;
+        }
+    } catch (erro) {
+        console.warn("Nao foi possivel ler a ordenacao da vitrine.", erro);
+    }
+
+    return "recommended";
+}
+
+function salvarOrdenacaoVitrine() {
+    try {
+        localStorage.setItem(VITRINE_SORT_STORAGE_KEY, ordenacaoVitrine);
+    } catch (erro) {
+        console.warn("Nao foi possivel salvar a ordenacao da vitrine.", erro);
+    }
+}
+
+function atualizarBotoesOrdenacao() {
+    vitrineSortButtons.forEach((button) => {
+        const ativo = button.dataset.vitrineSort === ordenacaoVitrine;
+        button.classList.toggle("ativo", ativo);
+        button.setAttribute("aria-pressed", ativo ? "true" : "false");
+    });
+}
+
+function ordenarChocolates(chocolates) {
+    const listaOrdenada = [...chocolates];
+
+    if (ordenacaoVitrine === "price-asc") {
+        listaOrdenada.sort((produtoA, produtoB) => {
+            const precoA = Number(produtoA.preco) || 0;
+            const precoB = Number(produtoB.preco) || 0;
+
+            if (precoA !== precoB) {
+                return precoA - precoB;
+            }
+
+            return String(produtoA.nome || "").localeCompare(String(produtoB.nome || ""), "pt-BR");
+        });
+    }
+
+    return listaOrdenada;
+}
+
+function atualizarContadorVitrine(quantidadeExibida) {
+    if (vitrineCount) {
+        vitrineCount.textContent = `Exibindo: ${quantidadeExibida} / ${listaChocolates.length}`;
+    }
+}
+
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function criarResumoCard(produto) {
+    const descricao = String(produto.descricao || "").trim();
+    return descricao || "Chocolate selecionado para uma experiencia delicada, presenteavel e marcante.";
+}
+
+function obterTotalAvaliacoes(produto, index) {
+    const chave = String(produto.slug || produto.nome || index);
+    const somaCaracteres = [...chave].reduce((total, caractere) => total + caractere.charCodeAt(0), 0);
+    return 24 + (somaCaracteres % 38);
+}
+
+function configurarArrasteVitrine() {
+    if (!container) {
+        return;
+    }
+
+    container.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0 || event.target.closest("button, a")) {
+            return;
+        }
+
+        vitrineArrastando = true;
+        vitrineArrasteInicioX = event.clientX;
+        vitrineScrollInicio = container.scrollLeft;
+        container.setPointerCapture(event.pointerId);
+    });
+
+    container.addEventListener("pointermove", (event) => {
+        if (!vitrineArrastando) {
+            return;
+        }
+
+        const deslocamento = event.clientX - vitrineArrasteInicioX;
+        container.scrollLeft = vitrineScrollInicio - deslocamento;
+    });
+
+    ["pointerup", "pointercancel", "pointerleave"].forEach((evento) => {
+        container.addEventListener(evento, () => {
+            vitrineArrastando = false;
+        });
+    });
+}
+
+function rolarVitrine(direcao) {
+    if (!container) {
+        return;
+    }
+
+    const primeiroCard = container.querySelector(".card");
+    const deslocamento = primeiroCard
+        ? primeiroCard.getBoundingClientRect().width + 22
+        : container.clientWidth * 0.85;
+
+    container.scrollBy({
+        left: direcao === "prev" ? -deslocamento : deslocamento,
+        behavior: "smooth",
+    });
+}
+
+function atualizarSetasVitrine() {
+    if (!container || vitrineScrollButtons.length === 0) {
+        return;
+    }
+
+    const tolerancia = 2;
+    const podeVoltar = container.scrollLeft > tolerancia;
+    const podeAvancar = container.scrollLeft + container.clientWidth < container.scrollWidth - tolerancia;
+
+    vitrineScrollButtons.forEach((button) => {
+        const podeUsar = button.dataset.vitrineScroll === "prev" ? podeVoltar : podeAvancar;
+        button.classList.toggle("vitrine-seta--oculta", !podeUsar);
+        button.disabled = !podeUsar;
+        button.setAttribute("aria-hidden", podeUsar ? "false" : "true");
+        button.setAttribute("tabindex", podeUsar ? "0" : "-1");
+    });
+}
+
+function posicionarSetasVitrine() {
+    if (!container) {
+        return;
+    }
+
+    const vitrine = document.getElementById("vitrine");
+    const primeiraImagem = container.querySelector(".card__imagem-box");
+
+    if (!vitrine || !primeiraImagem) {
+        return;
+    }
+
+    const vitrineRect = vitrine.getBoundingClientRect();
+    const imagemRect = primeiraImagem.getBoundingClientRect();
+    const centroImagem = imagemRect.top + imagemRect.height / 2 - vitrineRect.top;
+    vitrine.style.setProperty("--vitrine-setas-top", `${centroImagem}px`);
+}
+
 function normalizarTextoBusca(valor) {
     return String(valor || "")
         .normalize("NFD")
@@ -523,23 +876,264 @@ function produtoCorrespondeBusca(produto, termoBusca) {
     return campos.some((campo) => normalizarTextoBusca(campo).includes(termoBusca));
 }
 
-function aplicarPesquisa() {
-    const texto = normalizarTextoBusca(barraPesquisa.value);
-    const filtrados = texto
-        ? listaChocolates.filter((choc) => produtoCorrespondeBusca(choc, texto))
-        : [...listaChocolates];
-
-    renderizarChocolates(filtrados);
-    atualizarPainelPesquisa(texto, filtrados);
-    btnLimparPesquisa.classList.toggle("oculto", !texto);
+function produtoCorrespondeCategoria(produto, categoria) {
+    return !categoria || normalizarTextoBusca(produto.categoria) === categoria;
 }
 
 function obterChocolatesVisiveisPelaBusca() {
-    const texto = normalizarTextoBusca(barraPesquisa.value);
+    const texto = normalizarTextoBusca(barraPesquisa?.value || "");
 
-    return texto
-        ? listaChocolates.filter((choc) => produtoCorrespondeBusca(choc, texto))
-        : [...listaChocolates];
+    return listaChocolates.filter((choc) => {
+        const correspondeBusca = !texto || produtoCorrespondeBusca(choc, texto);
+        const correspondeCategoria = produtoCorrespondeCategoria(choc, categoriaAtiva);
+
+        return correspondeBusca && correspondeCategoria;
+    });
+}
+
+function atualizarEstadoFiltrosCategoria() {
+    if (!filtrosCategoria) {
+        return;
+    }
+
+    filtrosCategoria.querySelectorAll(".filtro-categoria").forEach((botao) => {
+        const ativo = botao.dataset.categoria === categoriaAtiva;
+        botao.classList.toggle("ativo", ativo);
+        botao.setAttribute("aria-pressed", ativo ? "true" : "false");
+    });
+}
+
+function renderizarFiltrosCategoria() {
+    if (!filtrosCategoria) {
+        return;
+    }
+
+    const categorias = [...new Set(
+        listaChocolates
+            .map((produto) => String(produto.categoria || "").trim())
+            .filter(Boolean)
+    )];
+
+    filtrosCategoria.innerHTML = "";
+
+    if (categorias.length <= 1) {
+        categoriaAtiva = "";
+        return;
+    }
+
+    [{ label: "Todos", valor: "" }, ...categorias.map((categoria) => ({
+        label: categoria,
+        valor: normalizarTextoBusca(categoria),
+    }))].forEach((filtro) => {
+        const botao = document.createElement("button");
+        botao.type = "button";
+        botao.className = "filtro-categoria";
+        botao.dataset.categoria = filtro.valor;
+        botao.textContent = filtro.label;
+        botao.setAttribute("aria-pressed", filtro.valor === categoriaAtiva ? "true" : "false");
+        botao.addEventListener("click", () => {
+            categoriaAtiva = filtro.valor;
+            const visiveis = obterChocolatesVisiveisPelaBusca();
+
+            renderizarChocolates(visiveis);
+            atualizarPainelPesquisa(normalizarTextoBusca(barraPesquisa?.value || ""), visiveis);
+            atualizarEstadoFiltrosCategoria();
+        });
+        filtrosCategoria.appendChild(botao);
+    });
+
+    atualizarEstadoFiltrosCategoria();
+}
+
+function criarBotaoResultadoPesquisa(produto) {
+    const botao = document.createElement("button");
+    botao.type = "button";
+    botao.className = "resultado-pesquisa__botao";
+    botao.textContent = "+";
+    botao.setAttribute("aria-label", `Adicionar ${produto.nome} ao carrinho`);
+    botao.addEventListener("click", () => {
+        adicionarAoCarrinho(produto.nome, produto.preco, produto.imagem);
+    });
+
+    return botao;
+}
+
+function criarItemPesquisa(produto) {
+    const item = document.createElement("article");
+    item.className = "resultado-pesquisa";
+
+    item.innerHTML = `
+        <img src="${escapeHtml(produto.imagem)}" alt="${escapeHtml(produto.nome)}">
+        <div class="resultado-pesquisa__info">
+            <strong>${escapeHtml(produto.nome)}</strong>
+            <p>${escapeHtml(produto.categoria || produto.destaque || "Chocolate")}</p>
+            <span>${formatarPreco(produto.preco)}</span>
+        </div>
+    `;
+    item.appendChild(criarBotaoResultadoPesquisa(produto));
+
+    return item;
+}
+
+function atualizarPainelPesquisa(termoBusca, resultados = []) {
+    if (!listaSugestoes || !listaResultadosPesquisa) {
+        return;
+    }
+
+    const sugestoes = (resultados.length > 0 ? resultados : listaChocolates).slice(0, 4);
+    listaSugestoes.innerHTML = "";
+    listaResultadosPesquisa.innerHTML = "";
+
+    sugestoes.forEach((produto) => {
+        listaSugestoes.appendChild(criarItemPesquisa(produto));
+    });
+
+    if (termoBusca && resultados.length === 0) {
+        listaResultadosPesquisa.innerHTML = '<p class="pesquisa-vazia">Nenhum chocolate encontrado.</p>';
+        return;
+    }
+
+    resultados.slice(0, 8).forEach((produto) => {
+        listaResultadosPesquisa.appendChild(criarItemPesquisa(produto));
+    });
+}
+
+function renderizarAtalhosPesquisa() {
+    if (!listaAtalhosPesquisa) {
+        return;
+    }
+
+    const categorias = [...new Set(listaChocolates.map((produto) => produto.categoria).filter(Boolean))].slice(0, 5);
+    listaAtalhosPesquisa.innerHTML = "";
+
+    categorias.forEach((categoria) => {
+        const botao = document.createElement("button");
+        botao.type = "button";
+        botao.className = "pesquisa-atalho";
+        botao.textContent = categoria;
+        botao.addEventListener("click", () => {
+            barraPesquisa.value = categoria;
+            aplicarPesquisa();
+        });
+        listaAtalhosPesquisa.appendChild(botao);
+    });
+}
+
+function aplicarPesquisa() {
+    const texto = normalizarTextoBusca(barraPesquisa?.value || "");
+    const filtrados = obterChocolatesVisiveisPelaBusca();
+
+    renderizarChocolates(filtrados);
+    atualizarPainelPesquisa(texto, filtrados);
+    btnLimparPesquisa?.classList.toggle("oculto", !texto);
+}
+
+function abrirOverlayPesquisa() {
+    if (!overlayPesquisa || !barraPesquisa) {
+        return;
+    }
+
+    clearTimeout(timeoutFechamentoPesquisa);
+    overlayPesquisa.classList.remove("oculto");
+    overlayPesquisa.classList.remove("overlay-pesquisa--visivel");
+    document.body.classList.add("sem-rolagem");
+    atualizarPainelPesquisa(normalizarTextoBusca(barraPesquisa.value), obterChocolatesVisiveisPelaBusca());
+    requestAnimationFrame(() => {
+        overlayPesquisa.classList.add("overlay-pesquisa--visivel");
+    });
+    barraPesquisa.focus();
+}
+
+function fecharOverlayPesquisa() {
+    if (!overlayPesquisa) {
+        return;
+    }
+
+    overlayPesquisa.classList.remove("overlay-pesquisa--visivel");
+
+    clearTimeout(timeoutFechamentoPesquisa);
+    timeoutFechamentoPesquisa = window.setTimeout(() => {
+        overlayPesquisa.classList.add("oculto");
+    }, 280);
+
+    if (!carrinhoLateral.classList.contains("ativo")) {
+        document.body.classList.remove("sem-rolagem");
+    }
+}
+
+function limparPesquisa() {
+    barraPesquisa.value = "";
+    btnLimparPesquisa.classList.add("oculto");
+    const filtrados = obterChocolatesVisiveisPelaBusca();
+    renderizarChocolates(filtrados);
+    atualizarPainelPesquisa("", filtrados);
+    barraPesquisa.focus();
+}
+
+function renderizarChocolates(chocolates) {
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+    container.scrollLeft = 0;
+    const chocolatesOrdenados = ordenarChocolates(chocolates);
+    atualizarContadorVitrine(chocolatesOrdenados.length);
+
+    if (chocolatesOrdenados.length === 0) {
+        container.innerHTML = "<p>Nenhum chocolate encontrado.</p>";
+        atualizarSetasVitrine();
+        return;
+    }
+
+    chocolatesOrdenados.forEach((choc, index) => {
+        const quantidade = obterQuantidadeNoCarrinho(choc.nome);
+        const card = document.createElement("article");
+        const descricao = criarResumoCard(choc);
+        const totalAvaliacoes = obterTotalAvaliacoes(choc, index);
+        card.className = "card";
+        card.style.setProperty("--card-stagger-index", String(index % 12));
+        card.innerHTML = `
+            <a class="card__imagem-link" href="produto.html?id=${encodeURIComponent(choc.slug)}">
+                <div class="card__imagem-box">
+                    <img src="${escapeHtml(choc.imagem)}" alt="${escapeHtml(choc.nome)}">
+                </div>
+            </a>
+            <div class="card__conteudo">
+                <a class="card__link" href="produto.html?id=${encodeURIComponent(choc.slug)}">
+                    <p class="card__descricao">${escapeHtml(descricao)}</p>
+                    <div class="card__linha">
+                        <h3>${escapeHtml(choc.nome)}</h3>
+                        <p class="card__preco">${formatarPreco(choc.preco)}</p>
+                    </div>
+                    <div class="card__rating" aria-label="Avaliacao maxima com ${totalAvaliacoes} avaliacoes">
+                        <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span>${totalAvaliacoes}</span>
+                    </div>
+                    <span class="card__selo">${escapeHtml(choc.destaque)}</span>
+                    <span class="card__quantidade-info">${quantidade > 0 ? `${quantidade} na sacola` : "Disponivel agora"}</span>
+                </a>
+            </div>
+        `;
+
+        const botaoAdicionar = document.createElement("button");
+        botaoAdicionar.type = "button";
+        botaoAdicionar.className = "card__cta";
+        botaoAdicionar.textContent = "+";
+        botaoAdicionar.setAttribute("aria-label", `Adicionar ${choc.nome} ao carrinho`);
+        botaoAdicionar.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            adicionarAoCarrinho(choc.nome, choc.preco, choc.imagem);
+        });
+        card.querySelector(".card__conteudo").appendChild(botaoAdicionar);
+        container.appendChild(card);
+    });
+
+    requestAnimationFrame(() => {
+        posicionarSetasVitrine();
+        atualizarSetasVitrine();
+    });
 }
 
 function formatarPreco(valor) {
@@ -617,6 +1211,7 @@ async function carregarChocolates() {
     listaChocolates = await carregarTodosChocolates();
     renderizarChocolates(listaChocolates);
     renderizarAtalhosPesquisa();
+    renderizarFiltrosCategoria();
     atualizarCarrinho(false);
 }
 
@@ -697,6 +1292,7 @@ function atualizarCarrinho(devePersistir = true) {
         }
 
         if (devePersistir) {
+            salvarCarrinhoLocal();
             persistirCarrinhoNoServidor();
         }
 
@@ -759,6 +1355,7 @@ function atualizarCarrinho(devePersistir = true) {
     }
 
     if (devePersistir) {
+        salvarCarrinhoLocal();
         persistirCarrinhoNoServidor();
     }
 }
@@ -878,6 +1475,7 @@ function fecharPainelCarrinho() {
 
     carrinhoLateral.classList.remove("ativo");
     overlayCarrinho.classList.remove("ativo");
+    retomarPopupCarrinho();
 
     if (overlayPesquisa.classList.contains("oculto") && !menuMobileAberto()) {
         document.body.classList.remove("sem-rolagem");
@@ -906,6 +1504,52 @@ document.addEventListener("click", (e) => {
         return;
     }
 });
+
+if (abrirPesquisa) {
+    abrirPesquisa.addEventListener("click", abrirOverlayPesquisa);
+}
+
+if (fecharPesquisa) {
+    fecharPesquisa.addEventListener("click", fecharOverlayPesquisa);
+}
+
+if (barraPesquisa) {
+    barraPesquisa.addEventListener("input", aplicarPesquisa);
+}
+
+if (btnLimparPesquisa) {
+    btnLimparPesquisa.addEventListener("click", limparPesquisa);
+}
+
+if (btnVerTodos) {
+    btnVerTodos.addEventListener("click", () => {
+        categoriaAtiva = "";
+        atualizarEstadoFiltrosCategoria();
+        limparPesquisa();
+        fecharOverlayPesquisa();
+        window.abrirVitrinePrincipal();
+    });
+}
+
+if (fecharPopupRemocao) {
+    fecharPopupRemocao.addEventListener("click", () => {
+        clearTimeout(popupRemocaoTimeout);
+        popupRemocao.classList.remove("ativo");
+        popupRemocao.setAttribute("aria-hidden", "true");
+    });
+}
+
+if (fecharPopupBoasVindas) {
+    fecharPopupBoasVindas.addEventListener("click", fecharPopupBoasVindasComEstado);
+}
+
+if (fecharPopupAvisoConta) {
+    fecharPopupAvisoConta.addEventListener("click", fecharPopupAvisoContaComEstado);
+}
+
+if (btnFinalizarPedido) {
+    btnFinalizarPedido.addEventListener("click", finalizarPedido);
+}
 
 atualizarBotoesOrdenacao();
 configurarArrasteVitrine();
@@ -968,3 +1612,4 @@ Promise.all([
     document.body.classList.remove("pagina-carregando");
 });
 exibirPopupBoasVindas();
+exibirPopupAvisoConta();

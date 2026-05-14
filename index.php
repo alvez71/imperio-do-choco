@@ -28,13 +28,85 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260417-5">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260514-3">
 </head>
 
 <body class="pagina-carregando">
     <script src="theme-init.js"></script>
-            <a href="#" class="menu-topo__link">Aprenda</a>
+
+    <header class="topo-site">
+        <div class="marca-site">
+            <img class="marca-site__logo" src="logo-velle-dulcis.png" alt="Velle Dulcis">
+        </div>
+
+        <nav class="menu-topo" aria-label="Principal">
+            <div class="menu-topo__item menu-topo__item--mega">
+                <a href="#vitrine" class="menu-topo__link menu-topo__link--dropdown">
+                    <span>Chocolate</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 10l5 5 5-5"></path>
+                    </svg>
+                </a>
+
+                <div class="mega-menu" role="group" aria-label="Explorar chocolates">
+                    <div class="mega-menu__colunas">
+                        <section class="mega-menu__coluna">
+                            <p class="mega-menu__titulo">Destaques</p>
+                            <a href="#vitrine" class="mega-menu__item">
+                                <strong>Selecao da Casa</strong>
+                                <span>Os chocolates que melhor representam a vitrine neste momento.</span>
+                            </a>
+                            <a href="#vitrine" class="mega-menu__item">
+                                <strong>Presentes Especiais</strong>
+                                <span>Opcoes pensadas para impressionar com sabor, acabamento e presenca.</span>
+                            </a>
+                            <a href="#vitrine" class="mega-menu__item">
+                                <strong>Importados</strong>
+                                <span>Sabores diferentes para quem quer experimentar algo fora do comum.</span>
+                            </a>
+                        </section>
+
+                        <section class="mega-menu__coluna">
+                            <p class="mega-menu__titulo">Tipos</p>
+                            <a href="#vitrine" class="mega-menu__lista-link">Chocolate recheado</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Chocolate artesanal</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Caixas premium</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Tabletes</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Importados</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Mais Vendidos</a>
+                        </section>
+
+                        <section class="mega-menu__coluna">
+                            <p class="mega-menu__titulo">Momentos</p>
+                            <a href="#vitrine" class="mega-menu__lista-link">Para presentear</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Para dividir</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Para kits</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Novidades</a>
+                            <a href="#vitrine" class="mega-menu__lista-link">Vitrine completa</a>
+                        </section>
+                    </div>
+
+                    <div class="mega-menu__destaques">
+                        <a class="mega-menu__card" href="produto.html?id=jojo-moranguinho">
+                            <img src="https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_alpinellawithstrawberry100gr.jpeg?v=1761647260" alt="Jojo Moranguinho">
+                            <div class="mega-menu__card-conteudo">
+                                <span class="mega-menu__card-tag">Selecao da casa</span>
+                                <strong>Jojo Moranguinho</strong>
+                            </div>
+                        </a>
+
+                        <a class="mega-menu__card" href="produto.html?id=beicinho-de-chocolate">
+                            <img src="https://www.rickdoces.com.br/estatico/rickdoces/images/temp/620_560cde9e09eea7d7770f1c1d5db26d91.jpeg?v=1768478586" alt="Beicinho de Chocolate">
+                            <div class="mega-menu__card-conteudo">
+                                <span class="mega-menu__card-tag">Favorito da vitrine</span>
+                                <strong>Beicinho de Chocolate</strong>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a href="historia.html">Nossa historia</a>
         </nav>
 
         <div class="acoes-topo">
@@ -198,6 +270,11 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
                         <button id="btn-limpar-pesquisa" class="btn-icone oculto" type="button" aria-label="Limpar pesquisa">&times;</button>
                     </div>
 
+                    <div class="pesquisa-atalhos" aria-label="Atalhos de busca">
+                        <span class="pesquisa-atalhos__rotulo">Atalhos rapidos</span>
+                        <div id="lista-atalhos-pesquisa" class="pesquisa-atalhos__lista"></div>
+                    </div>
+
                     <div id="painel-pesquisa" class="painel-pesquisa">
                         <div class="painel-pesquisa__bloco">
                             <h3>Sugestoes</h3>
@@ -216,8 +293,26 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
         </div>
     </div>
 
-    <main>
+    <main class="home-main">
+        <section class="home-hero" aria-labelledby="home-hero-title">
+            <div class="home-hero__conteudo">
+                <span class="home-hero__rotulo">Velle Dulcis</span>
+                <h1 id="home-hero-title">Chocolate com presenca de presente</h1>
+                <p>Uma vitrine mais calma, elegante e pronta para mostrar os sabores especiais da casa.</p>
+                <div class="home-hero__acoes">
+                    <a href="#vitrine" class="home-hero__acao home-hero__acao--primaria">Ver chocolates</a>
+                    <a href="historia.html" class="home-hero__acao">Nossa historia</a>
+                </div>
+            </div>
+        </section>
+
         <section id="vitrine" class="grid-chocolates">
+            <div class="vitrine-intro">
+                <p class="vitrine-intro__kicker">Chocolate</p>
+                <h1>Nossos chocolates</h1>
+                <p>Sabores especiais preparados para presentear e transformar qualquer momento em algo memoravel.</p>
+            </div>
+
             <div class="vitrine-toolbar" aria-label="Controles da vitrine">
                 <div class="vitrine-toolbar__sort" aria-label="Ordenar produtos">
                     <button class="vitrine-toolbar__button ativo" type="button" data-vitrine-sort="recommended" aria-pressed="true">Recomendados</button>
@@ -239,6 +334,7 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
                     </div>
                 </div>
             </div>
+            <div id="filtros-categoria" class="filtros-categoria" aria-label="Filtrar produtos por categoria"></div>
             <div id="container-cards" class="container"></div>
         </section>
     </main>
@@ -286,6 +382,9 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
                                 <circle cx="17.2" cy="6.8" r="1"></circle>
                             </svg>
                         </a>
+                        <span class="rodape-site__pix" aria-label="Pix" title="Pix">
+                            <img src="logo-pix-icone-1024.png" alt="Pix">
+                        </span>
                         <a href="#" aria-label="TikTok">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M14.5 4.5c.5 1.5 1.5 2.6 3 3.2v2.3c-1.1 0-2.2-.3-3-.9V14a4.5 4.5 0 11-4.5-4.5c.3 0 .6 0 .9.1V12a2.2 2.2 0 101.4 2V4.5z"></path>
@@ -297,11 +396,6 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
 
             <div class="rodape-site__base">
                 <p>&copy; Velle Dulcis 2026</p>
-                <div class="rodape-site__pagamentos" aria-label="Formas de pagamento">
-                    <span class="rodape-site__pix" aria-label="Pix" title="Pix">
-                        <img src="logo-pix-icone-1024.png" alt="Pix">
-                    </span>
-                </div>
                 <span class="rodape-site__moeda">BRL</span>
             </div>
         </div>
@@ -350,6 +444,17 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
         <button id="fechar-popup-boas-vindas" class="popup-boas-vindas__fechar" type="button" aria-label="Fechar mensagem">&times;</button>
     </div>
 
+    <div id="popup-aviso-conta" class="popup-aviso-conta" aria-live="polite" aria-hidden="true">
+        <div class="popup-aviso-conta__conteudo">
+            <strong>Finalize pedidos com mais seguranca</strong>
+            <span>Entre na sua conta e cadastre um telefone antes de finalizar a compra.</span>
+        </div>
+        <div class="popup-aviso-conta__acoes">
+            <a href="<?php echo htmlspecialchars($destinoConta, ENT_QUOTES, "UTF-8"); ?>">Entrar</a>
+            <button id="fechar-popup-aviso-conta" type="button" aria-label="Fechar aviso">&times;</button>
+        </div>
+    </div>
+
     <script>
         window.APP_AUTH = {
             autenticado: <?php echo $usuarioAutenticado ? "true" : "false"; ?>,
@@ -359,9 +464,9 @@ $rotuloConta = $usuarioAutenticado ? "" : "Entre ou cadastre-se";
             mensagemBoasVindas: <?php echo json_encode($mensagemBoasVindas, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>
         };
     </script>
-    <script src="products-data.js"></script>
-    <script src="auth.js"></script>
-    <script src="script.js"></script>
+    <script src="products-data.js?v=20260513-1"></script>
+    <script src="auth.js?v=20260513-1"></script>
+    <script src="script.js?v=20260514-2"></script>
 
 </body>
 

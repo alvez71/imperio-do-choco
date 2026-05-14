@@ -36,3 +36,4 @@
 - O cadastro de usuarios agora depende da chave unica do banco para evitar corrida de concorrencia.
 - O banco agora inclui `enderecos`, `pedidos`, `pedido_itens` e `estoque_movimentacoes`.
 - Produtos removidos no painel agora usam soft delete: saem da vitrine sem perder historico.
+- A recuperacao de senha usa a tabela `recuperacoes_senha`. Para envio real, configure `EMAIL_PROVIDER` como `brevo` ou `smtp` no `.env`.

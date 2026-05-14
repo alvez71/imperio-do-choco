@@ -44,6 +44,13 @@ $migracoes = [
             migrarComercial($pdo);
         },
     ],
+    [
+        "id" => "005_recuperacao_senha_schema",
+        "descricao" => "Cria a tabela de tokens para recuperacao de senha",
+        "executar" => static function (PDO $pdo): void {
+            migrarRecuperacaoSenha($pdo);
+        },
+    ],
 ];
 
 foreach ($migracoes as $migracao) {
@@ -583,6 +590,65 @@ function migrarComercial(PDO $pdo): void
     migrarPedidos($pdo);
     migrarPedidoItens($pdo);
     migrarEstoqueMovimentacoes($pdo);
+}
+
+function migrarRecuperacaoSenha(PDO $pdo): void
+{
+    if (!tabelaExiste($pdo, "recuperacoes_senha")) {
+        $pdo->exec(
+            "CREATE TABLE recuperacoes_senha (
+                id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                usuario_id INT UNSIGNED NOT NULL,
+                token_hash CHAR(64) NOT NULL,
+                expira_em DATETIME NOT NULL,
+                usado_em DATETIME DEFAULT NULL,
+                ip_solicitante VARCHAR(45) DEFAULT NULL,
+                criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (id),
+                UNIQUE KEY recuperacoes_token_unique (token_hash),
+                KEY recuperacoes_usuario_idx (usuario_id),
+                KEY recuperacoes_expira_idx (expira_em),
+                CONSTRAINT fk_recuperacoes_usuario
+                    FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+        );
+
+        return;
+    }
+
+    adicionarColunaSeAusente($pdo, "recuperacoes_senha", "usuario_id", "usuario_id INT UNSIGNED NOT NULL AFTER id");
+    adicionarColunaSeAusente($pdo, "recuperacoes_senha", "token_hash", "token_hash CHAR(64) NOT NULL AFTER usuario_id");
+    adicionarColunaSeAusente($pdo, "recuperacoes_senha", "expira_em", "expira_em DATETIME NOT NULL AFTER token_hash");
+    adicionarColunaSeAusente($pdo, "recuperacoes_senha", "usado_em", "usado_em DATETIME DEFAULT NULL AFTER expira_em");
+    adicionarColunaSeAusente($pdo, "recuperacoes_senha", "ip_solicitante", "ip_solicitante VARCHAR(45) DEFAULT NULL AFTER usado_em");
+    adicionarColunaSeAusente($pdo, "recuperacoes_senha", "criado_em", "criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER ip_solicitante");
+
+    garantirIndice(
+        $pdo,
+        "recuperacoes_senha",
+        ["recuperacoes_token_unique", "token_hash"],
+        "ALTER TABLE recuperacoes_senha ADD UNIQUE INDEX recuperacoes_token_unique (token_hash)"
+    );
+    garantirIndice(
+        $pdo,
+        "recuperacoes_senha",
+        ["recuperacoes_usuario_idx"],
+        "ALTER TABLE recuperacoes_senha ADD INDEX recuperacoes_usuario_idx (usuario_id)"
+    );
+    garantirIndice(
+        $pdo,
+        "recuperacoes_senha",
+        ["recuperacoes_expira_idx"],
+        "ALTER TABLE recuperacoes_senha ADD INDEX recuperacoes_expira_idx (expira_em)"
+    );
+    garantirForeignKey(
+        $pdo,
+        "recuperacoes_senha",
+        "fk_recuperacoes_usuario",
+        "ALTER TABLE recuperacoes_senha
+         ADD CONSTRAINT fk_recuperacoes_usuario
+         FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE"
+    );
 }
 
 function migrarSoftDeleteProdutos(PDO $pdo): void

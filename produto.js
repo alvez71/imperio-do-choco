@@ -33,7 +33,8 @@ function atualizarLinksDeRetorno() {
     const rotaHome = obterRotaHome();
 
     document.querySelectorAll("[data-home-link]").forEach((link) => {
-        link.setAttribute("href", rotaHome);
+        const ancora = String(link.dataset.homeAnchor || "").replace(/^#/, "");
+        link.setAttribute("href", ancora ? `${rotaHome}#${ancora}` : rotaHome);
     });
 }
 

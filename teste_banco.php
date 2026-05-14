@@ -18,7 +18,7 @@ try {
     $resultado = $stmt->fetch();
     echo "Banco atual: " . ($resultado["banco_atual"] ?? "desconhecido") . "\n";
 
-    $tabelasObrigatorias = ["usuarios", "produtos", "carrinho_itens", "enderecos", "pedidos", "pedido_itens", "estoque_movimentacoes"];
+    $tabelasObrigatorias = ["usuarios", "recuperacoes_senha", "produtos", "carrinho_itens", "enderecos", "pedidos", "pedido_itens", "estoque_movimentacoes"];
     $tabelasAusentes = listarTabelasAusentes($pdo, $tabelasObrigatorias);
 
     if ($tabelasAusentes === []) {

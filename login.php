@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="login.css?v=20260514-1">
 </head>
 <body class="login-body login-body--customer">
     <script src="theme-init.js"></script>
@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </label>
 
                 <div class="login-form__meta">
-                    <a class="login-form__assist" href="mailto:contato@velledulcis.com?subject=Recuperar%20senha">Esqueceu sua senha?</a>
+                    <a class="login-form__assist" href="esqueci_senha.php">Esqueceu sua senha?</a>
                 </div>
 
                 <button type="submit">Entrar</button>

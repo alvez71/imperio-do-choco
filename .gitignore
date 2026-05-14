@@ -4,10 +4,7 @@ desktop.ini
 
 .env
 .env.*
-<<<<<<< HEAD
 !.env.example
-=======
->>>>>>> 42de13b18067624c8c82cf4681fed6951fc785dd
 
 node_modules/
 vendor/

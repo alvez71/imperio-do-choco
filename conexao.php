@@ -147,6 +147,11 @@ function schemaUsuariosDisponivel(PDO $pdo): bool
     return tabelasBancoDisponiveis($pdo, ["usuarios"]);
 }
 
+function schemaRecuperacaoSenhaDisponivel(PDO $pdo): bool
+{
+    return tabelasBancoDisponiveis($pdo, ["usuarios", "recuperacoes_senha"]);
+}
+
 function schemaProdutosDisponivel(PDO $pdo): bool
 {
     return tabelasBancoDisponiveis($pdo, ["produtos"]);
